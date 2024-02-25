@@ -17,120 +17,40 @@ public class Reserva {
     @Column(name="idReserva")
     private Long idReserva;
     
-    @Column(name="destino")
-    private String destino;
-    
-    @Column(name="fecha")
-    private String fecha;
-    
-    @Column(name="horaSalida")
-    private String horaSalida;
-    
     @Column(name="numeroPuesto")
     private int numeroPuesto;
     
     @Column(name="estado")
     private String estado;
-    
-    @Column(name="totalPagar")
-    private double totalPagar;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario",referencedColumnName = "idUsuario")
+    @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
     private Usuario idUsuario;
-
-    @ManyToOne
-    @JoinColumn(name = "idDisponibilidad",referencedColumnName = "idDisponibilidad")
-    private Disponibilidad idDisponibilidad;
-
-    // Constructor
-    public Reserva() {
-    }
     
-    public Reserva(Long idReserva, String destino, String fecha, String horaSalida, int numeroPuesto, String estado,
-			double totalPagar, Usuario idUsuario, Disponibilidad idDisponibilidad) {
+	@ManyToOne
+    @JoinColumn(name = "idAdministrador", referencedColumnName = "idAdministrador")
+    private Administrador idAdministrador;
+	
+    @ManyToOne
+    @JoinColumn(name = "idViaje", referencedColumnName = "idViaje")
+    private Viaje idViaje;
+
+	public Reserva() {
 		super();
-		this.idReserva = idReserva;
-		this.destino = destino;
-		this.fecha = fecha;
-		this.horaSalida = horaSalida;
-		this.numeroPuesto = numeroPuesto;
-		this.estado = estado;
-		this.totalPagar = totalPagar;
-		this.idUsuario = idUsuario;
-		this.idDisponibilidad = idDisponibilidad;
+		// TODO Auto-generated constructor stub
 	}
 
-	// Getters y setters
-    public Long getId() {
-        return idReserva;
-    }
+	public Reserva(Long idReserva, int numeroPuesto, String estado, Usuario idUsuario, Administrador idAdministrador,
+			Viaje idViaje) {
+		super();
+		this.idReserva = idReserva;
+		this.numeroPuesto = numeroPuesto;
+		this.estado = estado;
+		this.idUsuario = idUsuario;
+		this.idAdministrador = idAdministrador;
+		this.idViaje = idViaje;
+	}
+    
+    
 
-    public void setId(Long id) {
-        this.idReserva = id;
-    }
-
-    public String getDestino() {
-        return destino;
-    }
-
-    public void setDestino(String destino) {
-        this.destino = destino;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getHoraSalida() {
-        return horaSalida;
-    }
-
-    public void setHoraSalida(String horaSalida) {
-        this.horaSalida = horaSalida;
-    }
-
-    public int getNumeroPuesto() {
-        return numeroPuesto;
-    }
-
-    public void setNumeroPuesto(int numeroPuesto) {
-        this.numeroPuesto = numeroPuesto;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public double getTotalPagar() {
-        return totalPagar;
-    }
-
-    public void setTotalPagar(double totalPagar) {
-        this.totalPagar = totalPagar;
-    }
-
-    public Usuario getUsuario() {
-        return idUsuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.idUsuario = usuario;
-    }
-
-    public Disponibilidad getDisponibilidad() {
-        return idDisponibilidad;
-    }
-
-    public void setDisponibilidad(Disponibilidad disponibilidad) {
-        this.idDisponibilidad = disponibilidad;
-    }
 }

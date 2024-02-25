@@ -1,55 +1,65 @@
 package com.example.demo.modelo;
 
-import jakarta.persistence.*;
-
 import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "automoviles")
 public class Automovil {
     @Id
-    @Column(name = "id_automovil")
-    private Long idAutomovil;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idAutomovil")
+    private Long idAutomovil; // Cambiado el tipo de dato de numeroAutomovil a Long y agregada la generación automática de valor
     
-    @Column(name = "capacidad_asientos")
-    private int capacidadAsientos;
+    @Column(name = "cupoAsientos")
+    private int cupoAsientos;
 
     @OneToMany(mappedBy = "idAutomovil")
-    private List<Disponibilidad> idDisponibilidades;
+    private List<Viaje> idViajes; // Relación uno a muchos con Viaje
 
-    // Constructores
-    public Automovil() {
-    }
-    
-    public Automovil(Long idAutomovil, int capacidadAsientos, List<Disponibilidad> idDisponibilidades) {
+	public Automovil() {
 		super();
-		this.idAutomovil = idAutomovil;
-		this.capacidadAsientos = capacidadAsientos;
-		this.idDisponibilidades = idDisponibilidades;
+		// TODO Auto-generated constructor stub
 	}
 
-	// Getters y setters
-    public Long getIdAutomovil() {
-        return idAutomovil;
-    }
+	public Automovil(Long idAutomovil, int cupoAsientos, List<Viaje> idViajes) {
+		super();
+		this.idAutomovil = idAutomovil;
+		this.cupoAsientos = cupoAsientos;
+		this.idViajes = idViajes;
+	}
 
-    public void setIdAutomovil(Long idAutomovil) {
-        this.idAutomovil = idAutomovil;
-    }
+	public Long getIdAutomovil() {
+		return idAutomovil;
+	}
 
-    public int getCapacidadAsientos() {
-        return capacidadAsientos;
-    }
+	public void setIdAutomovil(Long idAutomovil) {
+		this.idAutomovil = idAutomovil;
+	}
 
-    public void setCapacidadAsientos(int capacidadAsientos) {
-        this.capacidadAsientos = capacidadAsientos;
-    }
+	public int getCupoAsientos() {
+		return cupoAsientos;
+	}
 
-    public List<Disponibilidad> getDisponibilidades() {
-        return idDisponibilidades;
-    }
+	public void setCupoAsientos(int cupoAsientos) {
+		this.cupoAsientos = cupoAsientos;
+	}
 
-    public void setDisponibilidades(List<Disponibilidad> disponibilidades) {
-        this.idDisponibilidades = disponibilidades;
-    }
+	public List<Viaje> getIdViajes() {
+		return idViajes;
+	}
+
+	public void setIdViajes(List<Viaje> idViajes) {
+		this.idViajes = idViajes;
+	}
+    
+    
+
 }

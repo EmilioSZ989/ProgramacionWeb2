@@ -1,8 +1,16 @@
 package com.example.demo.modelo;
 
-import jakarta.persistence.*;
+
 
 import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "administradores")
@@ -17,53 +25,53 @@ public class Administrador {
     
     @Column(name = "contraseña")
     private String contraseña;
-
-    @OneToMany(mappedBy = "idAdministrador")
-    private List<Disponibilidad> idDisponibilidades;
-
-    // Constructores
-    public Administrador() {
-    }
     
-    public Administrador(Long idAdministrador, String nombreUsuario, String contraseña,
-			List<Disponibilidad> idDisponibilidades) {
+    @OneToMany(mappedBy = "idAdministrador") // Cambiado a mappedBy = "idAdministrador"
+    private List<Reserva> idReservas;
+
+	public Administrador() {
 		super();
-		this.idAdministrador = idAdministrador;
-		this.nombreUsuario = nombreUsuario;
-		this.contraseña = contraseña;
-		this.idDisponibilidades = idDisponibilidades;
+		// TODO Auto-generated constructor stub
 	}
 
-	// Getters y setters
-    public Long getId() {
-        return idAdministrador;
-    }
+	public Administrador(String nombreUsuario, String contraseña) {
+		super();
+		this.nombreUsuario = nombreUsuario;
+		this.contraseña = contraseña;
+	}
 
-    public void setId(Long id) {
-        this.idAdministrador = id;
-    }
+	public Long getIdAdministrador() {
+		return idAdministrador;
+	}
 
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
+	public void setIdAdministrador(Long idAdministrador) {
+		this.idAdministrador = idAdministrador;
+	}
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
 
-    public String getContraseña() {
-        return contraseña;
-    }
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
+	public String getContraseña() {
+		return contraseña;
+	}
 
-    public List<Disponibilidad> getDisponibilidades() {
-        return idDisponibilidades;
-    }
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
 
-    public void setDisponibilidades(List<Disponibilidad> disponibilidades) {
-        this.idDisponibilidades = disponibilidades;
-    }
+	public List<Reserva> getIdReservas() {
+		return idReservas;
+	}
+
+	public void setIdReservas(List<Reserva> idReservas) {
+		this.idReservas = idReservas;
+	}
+    
+    
+
 }

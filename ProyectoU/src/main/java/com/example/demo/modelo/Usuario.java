@@ -1,7 +1,17 @@
 package com.example.demo.modelo;
 
-import jakarta.persistence.*;
+
+
+import java.sql.Date;
 import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "usuarios")
@@ -24,77 +34,84 @@ public class Usuario {
     private String telefono;
     
     @Column(name="fechaNacimiento")
-    private String fechaNacimiento;
+    private Date fechaNacimiento; // Cambiado el tipo de dato a Date
 
     @OneToMany(mappedBy = "idUsuario")
-    private List<Reserva> idReservas;
+    private List<Reserva> idReservas; // Relación uno a muchos con Reserva
 
-    // Constructor, getters y setters
-    public Usuario() {
-    }
+	public Usuario() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public Usuario(String nombre, String apellidos, String cedula, String telefono, String fechaNacimiento) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.cedula = cedula;
-        this.telefono = telefono;
-        this.fechaNacimiento = fechaNacimiento;
-    }
+	public Usuario(Long idUsuario, String nombre, String apellidos, String cedula, String telefono,
+			Date fechaNacimiento, List<Reserva> reservas) {
+		super();
+		this.idUsuario = idUsuario;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.cedula = cedula;
+		this.telefono = telefono;
+		this.fechaNacimiento = fechaNacimiento;
+		this.idReservas = reservas;
+	}
 
-    // Getters y setters
-    public Long getId() {
-        return idUsuario;
-    }
+	public Long getIdUsuario() {
+		return idUsuario;
+	}
 
-    public void setId(Long id) {
-        this.idUsuario = id;
-    }
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public String getNombre() {
+		return nombre;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getApellidos() {
-        return apellidos;
-    }
+	public String getApellidos() {
+		return apellidos;
+	}
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
 
-    public String getCedula() {
-        return cedula;
-    }
+	public String getCedula() {
+		return cedula;
+	}
 
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
 
-    public String getTelefono() {
-        return telefono;
-    }
+	public String getTelefono() {
+		return telefono;
+	}
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
 
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
 
-    public void setFechaNacimiento(String fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
 
-    public List<Reserva> getReservas() {
-        return idReservas;
-    }
+	public List<Reserva> getReservas() {
+		return idReservas;
+	}
 
-    public void setReservas(List<Reserva> reservas) {
-        this.idReservas = reservas;
-    }
+	public void setReservas(List<Reserva> reservas) {
+		this.idReservas = reservas;
+	}
+    
+    
+
 }
