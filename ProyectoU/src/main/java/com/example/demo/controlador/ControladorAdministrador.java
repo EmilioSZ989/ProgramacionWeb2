@@ -1,5 +1,6 @@
 package com.example.demo.controlador;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,13 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.modelo.Administrador;
+import com.example.demo.modelo.Reserva;
 import com.example.demo.modelo.Usuario;
 import com.example.demo.repositorio.repositorioAdministrador;
+import com.example.demo.repositorio.repositorioReserva;
 @RestController
 @RequestMapping("/administrador")
 public class ControladorAdministrador {
 	@Autowired
 	private repositorioAdministrador repositorioAdministrador;
+	
+	@Autowired
+	private repositorioReserva repositorioReserva;
 	
 	@GetMapping("/ingresar_plataforma/{nombreUsuario}-{contraseña}")
 	public String ingresarPlataforma(@PathVariable String nombreUsuario, @PathVariable String contraseña) {
@@ -35,5 +41,5 @@ public class ControladorAdministrador {
 	public List<Object> listarUsuariosPorAutomovil(@PathVariable Long idAutomovil) {
 	    return repositorioAdministrador.usuariosPorAutomovil(idAutomovil);
 	}
-	
+	  
 }
