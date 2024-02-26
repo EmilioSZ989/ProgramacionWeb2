@@ -1,5 +1,7 @@
 package com.example.demo.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,25 +27,27 @@ public class Reserva {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
-    private int idUsuario;
+    @JsonIgnore
+    private Usuario idUsuario;
     
 	@ManyToOne
     @JoinColumn(name = "idAdministrador", referencedColumnName = "idAdministrador")
-    private int idAdministrador;
+	@JsonIgnore
+    private Administrador idAdministrador;
 	
     @ManyToOne
     @JoinColumn(name = "idViaje", referencedColumnName = "idViaje")
-    private int idViaje;
+    @JsonIgnore
+    private Viaje idViaje;
 
 	public Reserva() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reserva(Long idReserva, int numeroPuesto, String estado, int idUsuario, int idAdministrador,
-			int idViaje) {
+	public Reserva(int numeroPuesto, String estado, Usuario idUsuario, Administrador idAdministrador,
+			Viaje idViaje) {
 		super();
-		this.idReserva = idReserva;
 		this.numeroPuesto = numeroPuesto;
 		this.estado = estado;
 		this.idUsuario = idUsuario;
@@ -98,9 +102,5 @@ public class Reserva {
 	public void setIdViaje(Viaje idViaje) {
 		this.idViaje = idViaje;
 	}
-
-	
     
-    
-
-}
+	}
