@@ -29,11 +29,10 @@ public class Automovil {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Automovil(Long idAutomovil, int cupoAsientos, List<Viaje> idViajes) {
+	public Automovil(Long idAutomovil, int cupoAsientos) {
 		super();
 		this.idAutomovil = idAutomovil;
 		this.cupoAsientos = cupoAsientos;
-		this.idViajes = idViajes;
 	}
 
 	public Long getIdAutomovil() {
