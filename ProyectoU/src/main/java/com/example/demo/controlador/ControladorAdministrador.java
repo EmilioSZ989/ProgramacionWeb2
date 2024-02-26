@@ -1,5 +1,6 @@
 package com.example.demo.controlador;
 
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -10,16 +11,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-<<<<<<< HEAD
+
 import com.example.demo.modelo.Administrador;
 import com.example.demo.modelo.Reserva;
 import com.example.demo.modelo.Usuario;
 import com.example.demo.repositorio.repositorioAdministrador;
 import com.example.demo.repositorio.repositorioReserva;
-=======
+
 import com.example.demo.modelo.*;
 import com.example.demo.repositorio.*;
->>>>>>> 005da91dca40a8e213580acd6a641be7d29c52b8
+
 @RestController
 @RequestMapping("/administrador")
 public class ControladorAdministrador {
@@ -27,19 +28,14 @@ public class ControladorAdministrador {
 	private repositorioAdministrador repositorioAdministrador;
 	
 	@Autowired
-<<<<<<< HEAD
 	private repositorioReserva repositorioReserva;
 	
-=======
+	@Autowired
 	private repositorioViaje repositorioViaje;
 	
 	@Autowired
 	private repositorioUsuario repositorioUsuario;
-	
-	@Autowired
-	private repositorioReserva repositorioReserva;
 
->>>>>>> 005da91dca40a8e213580acd6a641be7d29c52b8
 	@GetMapping("/ingresar_plataforma/{nombreUsuario}-{contraseña}")
 	public String ingresarPlataforma(@PathVariable String nombreUsuario, @PathVariable String contraseña) {
 		Administrador admin = repositorioAdministrador.findById(Long.valueOf(1)).orElse(null);
@@ -58,10 +54,7 @@ public class ControladorAdministrador {
 	public List<Object> listarUsuariosPorAutomovil(@PathVariable Long idAutomovil) {
 	    return repositorioAdministrador.usuariosPorAutomovil(idAutomovil);
 	}
-<<<<<<< HEAD
-	  
-=======
-	
+
 	@GetMapping("/modificar_datos/{idReserva}")
 	public Reserva modDatosReserva(@PathVariable Long idReserva) {
 	    // Obtener la reserva existente por su ID
@@ -87,12 +80,12 @@ public class ControladorAdministrador {
 	    
 	    return null; // Manejar el caso en el que la reserva no se encuentre o no se puedan encontrar los usuarios/administrador/viaje
 	}
+	 @GetMapping("/reservas_del_dia_actual/{fecha}")
+	    public List<Object> obtenerReservasDelDiaActual(@PathVariable Date fecha) {
+	        return repositorioAdministrador.reservasDelDiaActual(fecha);
+	    }
 
 
+	
 
-	
-	
-	
-	
->>>>>>> 005da91dca40a8e213580acd6a641be7d29c52b8
 }
