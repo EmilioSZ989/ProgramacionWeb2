@@ -32,7 +32,7 @@ public class ControladorReserva {
 	@Autowired
 	private repositorioViaje repositorioViaje;
 	
-	@GetMapping("/Reserva")
+	@GetMapping("/reservas")
 	public List<Reserva> ListarReservas(){
 		return repositorioReserva.findAll();
 	}
