@@ -18,7 +18,4 @@ public interface repositorioAdministrador extends JpaRepository<Administrador, L
             + "WHERE a.id_automovil = :idAutomovil", nativeQuery=true)
     public List<Object> usuariosPorAutomovil(@Param("idAutomovil") Long idAutomovil);
 	
-	/*@Query(value="", nativeQuery=true)
-    public List<Object> ModporReserva(@Param("idReserva") Long idReserva);*/
-
 }

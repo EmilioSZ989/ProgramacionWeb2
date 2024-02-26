@@ -71,8 +71,26 @@ public class ControladorAdministrador {
 	}
 
 
+	@GetMapping("/registrar_pago/{idReserva}")
+	public String registrarPago(@PathVariable Long idReserva) {
+	    Reserva reserva = repositorioReserva.findById(idReserva).orElse(null);
 
-	
+	    if (reserva != null) {
+	        if (reserva.getEstado().equals("debe")) {
+	            reserva.setEstado("Pago");
+	            repositorioReserva.save(reserva);
+	            return "Pago registrado exitosamente.";
+	        } else if (reserva.getEstado().equals("pago")) {
+	            return "La reserva ya estaba pagada.";
+	        } else {
+	            return "Error en el estado de la reserva.";
+	        }
+	    } else {
+	        return "Reserva no encontrada.";
+	    }
+	}
+
+
 	
 	
 	

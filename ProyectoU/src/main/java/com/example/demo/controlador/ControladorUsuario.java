@@ -20,8 +20,8 @@ public class ControladorUsuario {
 	private repositorioReserva repositorioReserva;
 	
 	@GetMapping("/consultar_reserva/{idUsuario}")
-	public List<Reserva> consultarReservaUsuario(@PathVariable Long idUsuario){
-		return repositorioReserva.reservasPorUsuario(idUsuario);
+	public List<Object> consultarReservaUsuario(@PathVariable Long idUsuario){
+		return repositorioUsuario.reservasPorUsuario(idUsuario);
 		
 	}
 	

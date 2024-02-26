@@ -10,7 +10,6 @@ import com.example.demo.modelo.Reserva;
 
 public interface repositorioReserva extends JpaRepository<Reserva,Long>{
 	
-	@Query(value = "SELECT * FROM reservas WHERE id_usuario = :idUsuario", nativeQuery = true)
-    public List<Reserva> reservasPorUsuario(@Param("idUsuario") Long idUsuario);
+	
 	
 }
