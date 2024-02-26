@@ -1,5 +1,7 @@
 package com.example.demo.controlador;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.modelo.Administrador;
+import com.example.demo.modelo.Usuario;
 import com.example.demo.repositorio.repositorioAdministrador;
 @RestController
 @RequestMapping("/administrador")
@@ -26,6 +29,11 @@ public class ControladorAdministrador {
 	    } else {
 	        return "Administrador no encontrado";
 	    }
+	}
+	
+	@GetMapping("/listar_usuarios/{idAutomovil}")
+	public List<Object> listarUsuariosPorAutomovil(@PathVariable Long idAutomovil) {
+	    return repositorioAdministrador.usuariosPorAutomovil(idAutomovil);
 	}
 	
 }
