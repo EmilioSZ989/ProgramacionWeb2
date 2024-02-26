@@ -25,23 +25,23 @@ public class Reserva {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
-    private Usuario idUsuario;
+    private int idUsuario;
     
 	@ManyToOne
     @JoinColumn(name = "idAdministrador", referencedColumnName = "idAdministrador")
-    private Administrador idAdministrador;
+    private int idAdministrador;
 	
     @ManyToOne
     @JoinColumn(name = "idViaje", referencedColumnName = "idViaje")
-    private Viaje idViaje;
+    private int idViaje;
 
 	public Reserva() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reserva(Long idReserva, int numeroPuesto, String estado, Usuario idUsuario, Administrador idAdministrador,
-			Viaje idViaje) {
+	public Reserva(Long idReserva, int numeroPuesto, String estado, int idUsuario, int idAdministrador,
+			int idViaje) {
 		super();
 		this.idReserva = idReserva;
 		this.numeroPuesto = numeroPuesto;
