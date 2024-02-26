@@ -45,7 +45,7 @@ public class Usuario {
 	}
 
 	public Usuario(Long idUsuario, String nombre, String apellidos, String cedula, String telefono,
-			Date fechaNacimiento, List<Reserva> reservas) {
+			Date fechaNacimiento) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
@@ -53,7 +53,6 @@ public class Usuario {
 		this.cedula = cedula;
 		this.telefono = telefono;
 		this.fechaNacimiento = fechaNacimiento;
-		this.idReservas = reservas;
 	}
 
 	public Long getIdUsuario() {
