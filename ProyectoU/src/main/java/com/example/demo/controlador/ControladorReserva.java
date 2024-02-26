@@ -36,7 +36,12 @@ public class ControladorReserva {
 	public List<Reserva> ListarReservas(){
 		return repositorioReserva.findAll();
 	}
-   
+    @GetMapping("/eliminar/{id}")
+    public String Reserva(@PathVariable Long id) {
+        this.repositorioReserva.deleteById(id);
+        return "reserva eliminada";
+    }
+    
         @GetMapping("/guardar")
         public List<Reserva> guardarReserva(){
         	Usuario user = repositorioUsuario.findById(Long.valueOf(2)).orElse(null);
