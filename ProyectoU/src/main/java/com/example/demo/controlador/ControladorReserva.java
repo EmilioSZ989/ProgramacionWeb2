@@ -19,7 +19,7 @@ import com.example.demo.repositorio.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/Reserva")
+@RequestMapping("/reserva")
 public class ControladorReserva {
 	@Autowired
 	private repositorioReserva repositorioReserva;
@@ -33,7 +33,7 @@ public class ControladorReserva {
 	@Autowired
 	private repositorioViaje repositorioViaje;
 	
-	@GetMapping("/Reserva")
+	@GetMapping("/reservas")
 	public List<Reserva> ListarReservas(){
 		return repositorioReserva.findAll();
 	}
