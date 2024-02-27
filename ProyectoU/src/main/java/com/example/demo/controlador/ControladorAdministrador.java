@@ -75,6 +75,7 @@ public class ControladorAdministrador {
 	    }
 	}
 	
+	
 	@GetMapping("/registrar_pago/{idReserva}")
 	public String registrarPago(@PathVariable Long idReserva) {
 	    Reserva reserva = repositorioReserva.findById(idReserva).orElse(null);
@@ -93,47 +94,85 @@ public class ControladorAdministrador {
 	        return "Reserva no encontrada.";
 	    }
 	}
-	/*
+	
+	@GetMapping("/realizar_reserva/{id_lista_disponibilidad}")
+	public String realizarReservaAdmin(@PathVariable Long id_lista_disponibilidad) {
+	    String ms;
+	    // Datos de ejemplo para el usuario
+	    String nombre = "cris";
+	    String apellidos = "monte";
+	    Long cedula = 432506543L;
+	    String telefono = "3122345678";
+	    Date fechaNacimiento = Date.valueOf("2002-08-17"); // Corrección en el formato de la fecha
+	    
+	    // Obtener el cupo disponible de la lista de disponibilidad
+	    int cupoDisponible = repositorioListaDisponibilidad.buscarPorCupoDisponible(id_lista_disponibilidad);
+	    
+	    // Verificar si hay cupo disponible
+	    if (cupoDisponible > 0) {
+	        // Crear y guardar el usuario
+	        Usuario usuario = new Usuario();
+	        usuario.setCedula(cedula);
+	        usuario.setNombre(nombre);
+	        usuario.setApellidos(apellidos);
+	        usuario.setTelefono(telefono);
+	        usuario.setFechaNacimiento(fechaNacimiento);
+	        repositorioUsuario.save(usuario);
+	        
+	        // Obtener el usuario recién creado con su ID asignado
+	        usuario = repositorioUsuario.findById(cedula).orElse(null); // Modificado para manejar el caso de que el usuario no se encuentre
+	        
+	        if (usuario != null) { // Verificar si se encontró el usuario
+	            // Crear la reserva
+	            Reserva reserva = new Reserva();
+	            reserva.setNumeroPuesto(cupoDisponible); 
+	            reserva.setEstado(false); 
+	            reserva.setCedula(usuario); 
+	            reserva.setId_lista_disponibilidad(repositorioListaDisponibilidad.findById(id_lista_disponibilidad).orElse(null)); // Modificado para manejar el caso de que la lista de disponibilidad no se encuentre
+	            repositorioReserva.save(reserva);
+	            
+	            ms = "Su número de puesto es: " + cupoDisponible + " y tiene que pagar: " + reserva.getId_lista_disponibilidad().getTotalPagar();
 
+	            // Decrementar el cupo disponible
+	            cupoDisponible--;
+	            
+	            // Actualizar el cupo disponible en la lista de disponibilidad
+	            repositorioListaDisponibilidad.actualizarCupoDisponible(id_lista_disponibilidad, cupoDisponible);
+	            
+	            return ms;
+	        } else {
+	            return "Error al crear la reserva: no se encontró el usuario.";
+	        }
+	    } else if (cupoDisponible == 0) {
+	        repositorioListaDisponibilidad.deleteById(id_lista_disponibilidad);
+	        return "Error al crear la reserva: no hay cupo disponible.";
+	    }
+	    return null;
+	}
 	@GetMapping("/modificar_datos/{idReserva}")
-	public Reserva modDatosReserva(@PathVariable Long idReserva) {
-	    // Obtener la reserva existente por su ID
-=======
-	
-	/*@GetMapping("/modificar_datos/{idUsuario}")
-    public String modDatosReserva(@PathVariable Long idUsuario) {
-        int numeroPuesto=4;
-        String estadoPago="debe";
-        Reserva reserva = repositorioAdministrador.reservaPorUsuario(idUsuario);
+	public String modDatosReserva(@PathVariable Long idReserva) {
+	    // Buscar la reserva por su ID
+	    Reserva reserva = repositorioReserva.findById(idReserva).orElse(null);
+	    
+	    if (reserva != null) {
+	        int nuevoNumeroPuesto = 50;
+	        boolean nuevoEstado = false;
+	        reserva.setNumeroPuesto(nuevoNumeroPuesto);
+	        reserva.setEstado(nuevoEstado);
+	        repositorioReserva.save(reserva);
+	        
+	        return "Los datos de la reserva han sido modificados exitosamente.";
+	    } else {
+	        return "No se encontró ninguna reserva con el ID especificado.";
+	    }
+	}
 
-
-        if (reserva != null) {
-
-            reserva.setNumeroPuesto(numeroPuesto);
-            reserva.setEstado(estadoPago);
-
-            repositorioReserva.save(reserva);
-
-            // Devolver un mensaje de éxito
-            return "Datos de la reserva modificados correctamente.";
-        } else {
-            // Si no se encontró la reserva, devolver un mensaje de error
-            return "No se encontró una reserva asociada al usuario.";
-        }
-    }
-
-
-
-	
-	 @GetMapping("/reservas_del_dia_actual/{fecha}")
-	    public List<Object> obtenerReservasDelDiaActual(@PathVariable Date fecha) {
-	        return repositorioAdministrador.reservasDelDiaActual(fecha);
-	    } 
-	@GetMapping("/realizar_reserva_usuario")
-	public String realizarReservaUsuario() {
-		return null;
-		
-	}*/
-	
 	
 }
+	
+
+	
+
+	
+	
+
