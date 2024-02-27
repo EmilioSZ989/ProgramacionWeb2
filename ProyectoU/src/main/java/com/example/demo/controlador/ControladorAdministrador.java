@@ -1,5 +1,7 @@
 package com.example.demo.controlador;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,12 +41,18 @@ public class ControladorAdministrador {
 	    }
 	}
 	
-	/*@GetMapping("/listar_usuarios/{idAutomovil}")
-	public List<Object> listarUsuariosPorAutomovil(@PathVariable Long idAutomovil) {
-	    return repositorioAdministrador.usuariosPorAutomovil(idAutomovil);
+	@GetMapping("/listar_reservas")
+	public List<Reserva> listarReservaDia(){
+	    LocalDate fechaActual = LocalDate.now();
+	    return repositorioReserva.reservaPorDia(fechaActual);
+	}
+
+	@GetMapping("/listar_usuarios/{id_bus}")
+	public List<Usuario> listarUsuariosPorAutomovil(@PathVariable Long id_bus) {
+	    return repositorioUsuario.usuariosPorAutomovil(id_bus);
 	}
 	
-	@GetMapping("/modificar_datos/{idUsuario}")
+	/*@GetMapping("/modificar_datos/{idUsuario}")
     public String modDatosReserva(@PathVariable Long idUsuario) {
         int numeroPuesto=4;
         String estadoPago="debe";
@@ -87,11 +95,7 @@ public class ControladorAdministrador {
 	    }
 	}
 
-	@GetMapping("/realizar_reserva_usuario")
-	public String realizarReservaUsuario() {
-		return null;
-		
-	}*/
+	*/
 	
 	
 	

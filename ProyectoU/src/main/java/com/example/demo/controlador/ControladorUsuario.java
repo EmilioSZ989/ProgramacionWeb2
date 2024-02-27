@@ -1,6 +1,7 @@
 package com.example.demo.controlador;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,7 @@ public class ControladorUsuario {
 	@Autowired
 	private repositorioListaDisponibilidad repositorioListaDisponibilidad;
 	
+	//CORREGIR ESTE CODE
 	@GetMapping("/realizar_reserva/{id_lista_disponibilidad}")
 	public String realizarReserva(@PathVariable Long id_lista_disponibilidad) {
 		String ms;
@@ -34,8 +36,6 @@ public class ControladorUsuario {
 	    Long cedula = 123456789L;
 	    String telefono = "1234567890";
 	    Date fechaNacimiento = Date.valueOf("1990-01-01");
-	    
-	    
 	    
 	    // Obtener el cupo disponible de la lista de disponibilidad
 	    int cupoDisponible = repositorioListaDisponibilidad.buscarPorCupoDisponible(id_lista_disponibilidad);
@@ -79,11 +79,26 @@ public class ControladorUsuario {
 
 
 	
-	/*@GetMapping("/consultar_reserva/{idUsuario}")
-	public List<Object> consultarReservaUsuario(@PathVariable Long idUsuario){
-		return repositorioUsuario.reservasPorUsuario(idUsuario);
+	@GetMapping("/consultar_reserva/{cedula}")
+	public List<Reserva> consultarReservaUsuario(@PathVariable Long cedula){
+		return repositorioReserva.reservasPorUsuario(cedula);
 		
-	}*/
+	}
+	
+	@GetMapping("/cancelar_reserva/{id_reserva}")
+	public String cancelarReservaUsuario(@PathVariable Long id_reserva) {
+	    Reserva reserva = repositorioReserva.findById(id_reserva).orElse(null);
+	    
+	    if (reserva != null) {
+	        repositorioReserva.deleteById(id_reserva);
+	        
+	        return "La reserva con ID " + id_reserva + " ha sido cancelada.";
+	    } else {
+	        return "No se encontró ninguna reserva con el ID " + id_reserva + ".";
+	    }
+	}
+
+
 	
 
 }
