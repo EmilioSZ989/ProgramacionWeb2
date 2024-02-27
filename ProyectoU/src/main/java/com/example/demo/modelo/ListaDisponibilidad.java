@@ -10,12 +10,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "viajes")
-public class Viaje {
+@Table(name = "lista_disponibilidad")
+public class ListaDisponibilidad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idViaje")
-    private Long idViaje;
+    @Column(name = "id_lista_disponibilidad")
+    private Long idListaDisponibilidad;
     
     @Column(name = "destino")
     private String destino;
@@ -23,42 +23,42 @@ public class Viaje {
     @Column(name = "fecha")
     private String fecha;
     
-    @Column(name = "horaSalida")
+    @Column(name = "hora_salida")
     private String horaSalida;
    
-    @Column(name="totalPagar")
+    @Column(name="total_pagar")
     private double totalPagar;
     
-    @Column(name = "cupoDisponible")
+    @Column(name = "cupo_disponible")
     private int cupoDisponible;
 
     @ManyToOne
-    @JoinColumn(name = "idAutomovil")
-    private Automovil idAutomovil;
+    @JoinColumn(name = "id_automovil")
+    private Bus idBus;
 
-	public Viaje() {
+	public ListaDisponibilidad() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Viaje(Long idViaje, String destino, String fecha, String horaSalida, double totalPagar, int cupoDisponible,
-			Automovil automovil) {
+	public ListaDisponibilidad(Long idListaDisponibilidad, String destino, String fecha, String horaSalida,
+			double totalPagar, int cupoDisponible, Bus idBus) {
 		super();
-		this.idViaje = idViaje;
+		this.idListaDisponibilidad = idListaDisponibilidad;
 		this.destino = destino;
 		this.fecha = fecha;
 		this.horaSalida = horaSalida;
 		this.totalPagar = totalPagar;
 		this.cupoDisponible = cupoDisponible;
-		this.idAutomovil = automovil;
+		this.idBus = idBus;
 	}
 
-	public Long getIdViaje() {
-		return idViaje;
+	public Long getIdListaDisponibilidad() {
+		return idListaDisponibilidad;
 	}
 
-	public void setIdViaje(Long idViaje) {
-		this.idViaje = idViaje;
+	public void setIdListaDisponibilidad(Long idListaDisponibilidad) {
+		this.idListaDisponibilidad = idListaDisponibilidad;
 	}
 
 	public String getDestino() {
@@ -101,14 +101,13 @@ public class Viaje {
 		this.cupoDisponible = cupoDisponible;
 	}
 
-	public Automovil getAutomovil() {
-		return idAutomovil;
+	public Bus getIdBus() {
+		return idBus;
 	}
 
-	public void setAutomovil(Automovil automovil) {
-		this.idAutomovil = automovil;
+	public void setIdBus(Bus idBus) {
+		this.idBus = idBus;
 	}
     
     
-
 }

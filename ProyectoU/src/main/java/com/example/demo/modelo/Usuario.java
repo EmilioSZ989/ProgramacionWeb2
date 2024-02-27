@@ -17,50 +17,41 @@ import jakarta.persistence.Table;
 @Table(name = "usuarios")
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idUsuario")
-    private Long idUsuario;
+    @Column(name = "cedula", unique = true)
+    private Long cedula;
     
-    @Column(name="nombre")
+    @Column(name = "nombre")
     private String nombre;
     
-    @Column(name="apellidos")
+    @Column(name = "apellidos")
     private String apellidos;
     
-    @Column(name="cedula")
-    private String cedula;
-    
-    @Column(name="telefono")
+    @Column(name = "telefono")
     private String telefono;
     
-    @Column(name="fechaNacimiento")
-    private Date fechaNacimiento; // Cambiado el tipo de dato a Date
-
-    @OneToMany(mappedBy = "idUsuario")
-    private List<Reserva> idReservas; // Relación uno a muchos con Reserva
+    @Column(name = "fecha_nacimiento")
+    private Date fechaNacimiento;
 
 	public Usuario() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Usuario(Long idUsuario, String nombre, String apellidos, String cedula, String telefono,
-			Date fechaNacimiento) {
+	public Usuario(Long cedula, String nombre, String apellidos, String telefono, Date fechaNacimiento) {
 		super();
-		this.idUsuario = idUsuario;
+		this.cedula = cedula;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
-		this.cedula = cedula;
 		this.telefono = telefono;
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public Long getIdUsuario() {
-		return idUsuario;
+	public Long getCedula() {
+		return cedula;
 	}
 
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setCedula(Long cedula) {
+		this.cedula = cedula;
 	}
 
 	public String getNombre() {
@@ -79,14 +70,6 @@ public class Usuario {
 		this.apellidos = apellidos;
 	}
 
-	public String getCedula() {
-		return cedula;
-	}
-
-	public void setCedula(String cedula) {
-		this.cedula = cedula;
-	}
-
 	public String getTelefono() {
 		return telefono;
 	}
@@ -102,15 +85,5 @@ public class Usuario {
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
-
-	public List<Reserva> getReservas() {
-		return idReservas;
-	}
-
-	public void setReservas(List<Reserva> reservas) {
-		this.idReservas = reservas;
-	}
-    
-    
-
-}
+	
+}	

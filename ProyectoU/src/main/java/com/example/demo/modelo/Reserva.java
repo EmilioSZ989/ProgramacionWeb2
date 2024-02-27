@@ -1,7 +1,5 @@
 package com.example.demo.modelo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,51 +17,43 @@ import java.time.LocalDate;
 public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idReserva")
+    @Column(name = "id_reserva")
     private Long idReserva;
     
-    @Column(name="numeroPuesto")
+    @Column(name = "numero_puesto")
     private int numeroPuesto;
     
-    @Column(name="estado")
-    private String estado;
+    @Column(name = "estado")
+    private Boolean estado;
     
-    @Column(name="fechaReserva") // Nueva columna para la fecha de reserva
+    @Column(name = "fecha_reserva") // Cambiado el nombre de la columna para seguir la convención de nomenclatura Java (camelCase)
     private LocalDate fechaReserva;
 
     @ManyToOne
-    @JoinColumn(name = "idUsuario", referencedColumnName = "idUsuario")
-    @JsonIgnore
-    private Usuario idUsuario;
+    @JoinColumn(name = "cedula", referencedColumnName = "cedula")
+    private Usuario cedula; // Cambiado el nombre de la variable para ser más representativo
     
     @ManyToOne
-    @JoinColumn(name = "idAdministrador", referencedColumnName = "idAdministrador")
-    @JsonIgnore
-    private Administrador idAdministrador;
-    
-    @ManyToOne
-    @JoinColumn(name = "idViaje", referencedColumnName = "idViaje")
-    @JsonIgnore
-    private Viaje idViaje;
+    @JoinColumn(name = "id_lista_disponibilidad", referencedColumnName = "id_lista_disponibilidad")
+    private ListaDisponibilidad id_lista_disponibilidad; // Cambiado el nombre de la variable para ser más representativo
+
 
     public Reserva() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	public Reserva(Long idReserva, int numeroPuesto, String estado, LocalDate fechaReserva, Usuario idUsuario,
-			Administrador idAdministrador, Viaje idViaje) {
-		super();
-		this.idReserva = idReserva;
-		this.numeroPuesto = numeroPuesto;
-		this.estado = estado;
-		this.fechaReserva = fechaReserva;
-		this.idUsuario = idUsuario;
-		this.idAdministrador = idAdministrador;
-		this.idViaje = idViaje;
-	}
+    public Reserva(Long idReserva, int numeroPuesto, Boolean estado, LocalDate fechaReserva, Usuario cedula,
+            ListaDisponibilidad id_lista_disponibilidad) {
+        super();
+        this.idReserva = idReserva;
+        this.numeroPuesto = numeroPuesto;
+        this.estado = estado;
+        this.fechaReserva = fechaReserva;
+        this.cedula = cedula;
+        this.id_lista_disponibilidad = id_lista_disponibilidad;
+    }
 
-	public Long getIdReserva() {
+    public Long getIdReserva() {
         return idReserva;
     }
 
@@ -79,44 +69,36 @@ public class Reserva {
         this.numeroPuesto = numeroPuesto;
     }
 
-    public String getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
-    public Administrador getIdAdministrador() {
-        return idAdministrador;
-    }
-
-    public void setIdAdministrador(Administrador idAdministrador) {
-        this.idAdministrador = idAdministrador;
-    }
-
-    public Viaje getIdViaje() {
-        return idViaje;
-    }
-
-    public void setIdViaje(Viaje idViaje) {
-        this.idViaje = idViaje;
-    }
-    
     public LocalDate getFechaReserva() {
         return fechaReserva;
     }
 
     public void setFechaReserva(LocalDate fechaReserva) {
         this.fechaReserva = fechaReserva;
+    }
+
+    public Usuario getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(Usuario cedula) {
+        this.cedula = cedula;
+    }
+
+    public ListaDisponibilidad getId_lista_disponibilidad() {
+        return id_lista_disponibilidad;
+    }
+
+    public void setId_lista_disponibilidad(ListaDisponibilidad id_lista_disponibilidad) {
+        this.id_lista_disponibilidad = id_lista_disponibilidad;
     }
 
     // Método que se ejecuta antes de guardar la reserva para establecer la fecha de reserva

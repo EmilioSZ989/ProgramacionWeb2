@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.modelo.Administrador;
 import com.example.demo.modelo.Reserva;
 import com.example.demo.modelo.Usuario;
-import com.example.demo.modelo.Viaje;
 import com.example.demo.repositorio.*;
 
 import java.util.Optional;
@@ -22,7 +21,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/reserva")
 public class ControladorReserva {
-	@Autowired
+	/*@Autowired
 	private repositorioReserva repositorioReserva;
 	
 	@Autowired
@@ -57,7 +56,7 @@ public class ControladorReserva {
             }
             
             return this.repositorioReserva.findAll();
-        }
+        }*/
 
 
 
