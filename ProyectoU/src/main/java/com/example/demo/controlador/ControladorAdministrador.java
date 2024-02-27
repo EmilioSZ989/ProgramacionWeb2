@@ -10,8 +10,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+import com.example.demo.modelo.Administrador;
+import com.example.demo.modelo.Reserva;
+import com.example.demo.modelo.Usuario;
+import com.example.demo.repositorio.repositorioAdministrador;
+import com.example.demo.repositorio.repositorioReserva;
+
 import com.example.demo.modelo.*;
 import com.example.demo.repositorio.*;
+
 @RestController
 @RequestMapping("/administrador")
 public class ControladorAdministrador {
@@ -19,13 +27,15 @@ public class ControladorAdministrador {
 	private repositorioAdministrador repositorioAdministrador;
 	
 	@Autowired
+
+	private repositorioReserva repositorioReserva;
+	
+	@Autowired
 	private repositorioListaDisponibilidad repositorioListaDisponibilidad;
+
 	
 	@Autowired
 	private repositorioUsuario repositorioUsuario;
-	
-	@Autowired
-	private repositorioReserva repositorioReserva;
 
 	@GetMapping("/ingresar_plataforma/{Usuario}-{contraseña}")
 	public String ingresarPlataforma(@PathVariable String Usuario, @PathVariable String contraseña) {
@@ -51,6 +61,17 @@ public class ControladorAdministrador {
 	public List<Usuario> listarUsuariosPorAutomovil(@PathVariable Long id_bus) {
 	    return repositorioUsuario.usuariosPorAutomovil(id_bus);
 	}
+	/*@GetMapping("/listar_usuarios/{idAutomovil}")
+	public List<Object> listarUsuariosPorAutomovil(@PathVariable Long idAutomovil) {
+	    return repositorioAdministrador.usuariosPorAutomovil(idAutomovil);
+>>>>>>> a215236123cf4afbb50fb98756a279b9f181a68e
+	}
+<<<<<<< HEAD
+
+	@GetMapping("/modificar_datos/{idReserva}")
+	public Reserva modDatosReserva(@PathVariable Long idReserva) {
+	    // Obtener la reserva existente por su ID
+=======
 	
 	/*@GetMapping("/modificar_datos/{idUsuario}")
     public String modDatosReserva(@PathVariable Long idUsuario) {
@@ -78,6 +99,7 @@ public class ControladorAdministrador {
 
 	@GetMapping("/registrar_pago/{idReserva}")
 	public String registrarPago(@PathVariable Long idReserva) {
+>>>>>>> e482f2237fe521b2be8125fb7e4313acba4d1dfc
 	    Reserva reserva = repositorioReserva.findById(idReserva).orElse(null);
 
 	    if (reserva != null) {
@@ -94,9 +116,15 @@ public class ControladorAdministrador {
 	        return "Reserva no encontrada.";
 	    }
 	}
-
-	*/
-	
+	 @GetMapping("/reservas_del_dia_actual/{fecha}")
+	    public List<Object> obtenerReservasDelDiaActual(@PathVariable Date fecha) {
+	        return repositorioAdministrador.reservasDelDiaActual(fecha);
+	    } 
+	@GetMapping("/realizar_reserva_usuario")
+	public String realizarReservaUsuario() {
+		return null;
+		
+	}*/
 	
 	
 }

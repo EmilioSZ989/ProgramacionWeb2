@@ -76,8 +76,6 @@ public class ControladorUsuario {
 	    }
 	    return null;
 	}
-
-
 	
 	@GetMapping("/consultar_reserva/{cedula}")
 	public List<Reserva> consultarReservaUsuario(@PathVariable Long cedula){
@@ -85,8 +83,9 @@ public class ControladorUsuario {
 		
 	}
 	
+	
 	@GetMapping("/cancelar_reserva/{id_reserva}")
-	public String cancelarReservaUsuario(@PathVariable Long id_reserva) {
+	public String cancelarReserva(@PathVariable Long id_reserva) {
 	    Reserva reserva = repositorioReserva.findById(id_reserva).orElse(null);
 	    
 	    if (reserva != null) {
@@ -97,7 +96,6 @@ public class ControladorUsuario {
 	        return "No se encontró ninguna reserva con el ID " + id_reserva + ".";
 	    }
 	}
-
 
 	
 
