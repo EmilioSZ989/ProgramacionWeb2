@@ -2,6 +2,7 @@ package com.example.demo.controlador;
 
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.modelo.Administrador;
 import com.example.demo.modelo.Reserva;
 import com.example.demo.modelo.Usuario;
-import com.example.demo.modelo.Viaje;
 import com.example.demo.repositorio.*;
 
 import java.util.Optional;
@@ -21,7 +21,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/reserva")
 public class ControladorReserva {
-	@Autowired
+	/*@Autowired
 	private repositorioReserva repositorioReserva;
 	
 	@Autowired
@@ -45,13 +45,19 @@ public class ControladorReserva {
         }
         
         @GetMapping("/guardar")
-        public List<Reserva> guardarReserva(){
-        	Usuario user = repositorioUsuario.findById(Long.valueOf(2)).orElse(null);
-        	Administrador admin = repositorioAdministrador.findById(Long.valueOf(1)).orElse(null);
-        	Viaje viaje = repositorioViaje.findById(Long.valueOf(1)).orElse(null);
-            Reserva e= new Reserva(6,"Disponible",user,admin,viaje);
-            this.repositorioReserva.save(e);
+        public List<Reserva> guardarReserva() {
+            Usuario user = repositorioUsuario.findById(Long.valueOf(2)).orElse(null);
+            Administrador admin = repositorioAdministrador.findById(Long.valueOf(1)).orElse(null);
+            Viaje viaje = repositorioViaje.findById(Long.valueOf(1)).orElse(null);
+            
+            if (user != null && admin != null && viaje != null) {
+                Reserva reserva = new Reserva(null, 6, "Disponible", LocalDate.now(), user, admin, viaje);
+                this.repositorioReserva.save(reserva);
+            }
+            
             return this.repositorioReserva.findAll();
-        }
+        }*/
+
+
 
 }

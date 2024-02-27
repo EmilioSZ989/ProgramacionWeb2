@@ -21,6 +21,12 @@ public interface repositorioAdministrador extends JpaRepository<Administrador, L
     public List<Object> usuariosPorAutomovil(@Param("idAutomovil") Long idAutomovil);
 	
 
+
 	@Query(value="SELECT r FROM Reservas r WHERE DATE(r.fecha_reserva) = :fecha",nativeQuery=true)
     public List<Object> reservasDelDiaActual(@Param("fecha") Date fecha);
+
+	@Query(value = "SELECT r.* FROM reservas r WHERE r.id_usuario = :idUsuario", nativeQuery = true)
+    public Reserva reservaPorUsuario(@Param("idUsuario") Long idUsuario);
+	
+
 }
