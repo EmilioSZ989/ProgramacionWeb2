@@ -77,11 +77,23 @@ public class ControladorUsuario {
 	    }
 	    return null;
 	}
-
 	
 	@GetMapping("/consultar_reserva/{cedula}")
 	public List<Reserva> consultarReservaUsuario(@PathVariable Long cedula){
 		return repositorioReserva.reservasPorUsuario(cedula);
+		
+	}
+	@GetMapping("/cancelar_reserva/{id_reserva}")
+	public String cancelarReserva(@PathVariable Long id_reserva) {
+	    Reserva reserva = repositorioReserva.findById(id_reserva).orElse(null);
+	    
+	    if (reserva != null) {
+	        repositorioReserva.deleteById(id_reserva);
+	        
+	        return "La reserva con ID " + id_reserva + " ha sido cancelada.";
+	    } else {
+	        return "No se encontró ninguna reserva con el ID " + id_reserva + ".";
+	    }
 		
 	}
 
