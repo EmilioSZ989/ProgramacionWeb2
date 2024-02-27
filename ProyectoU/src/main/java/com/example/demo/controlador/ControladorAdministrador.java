@@ -61,12 +61,39 @@ public class ControladorAdministrador {
 	public List<Usuario> listarUsuariosPorAutomovil(@PathVariable Long id_bus) {
 	    return repositorioUsuario.usuariosPorAutomovil(id_bus);
 	}
-	/*@GetMapping("/listar_usuarios/{idAutomovil}")
-	public List<Object> listarUsuariosPorAutomovil(@PathVariable Long idAutomovil) {
-	    return repositorioAdministrador.usuariosPorAutomovil(idAutomovil);
->>>>>>> a215236123cf4afbb50fb98756a279b9f181a68e
+	
+	@GetMapping("/cancelar_reserva/{id_reserva}")
+	public String cancelarReservaAdministrador(@PathVariable Long id_reserva) {
+	    Reserva reserva = repositorioReserva.findById(id_reserva).orElse(null);
+	    
+	    if (reserva != null) {
+	        repositorioReserva.deleteById(id_reserva);
+	        
+	        return "La reserva con ID " + id_reserva + " ha sido cancelada.";
+	    } else {
+	        return "No se encontró ninguna reserva con el ID " + id_reserva + ".";
+	    }
 	}
-<<<<<<< HEAD
+	
+	@GetMapping("/registrar_pago/{idReserva}")
+	public String registrarPago(@PathVariable Long idReserva) {
+	    Reserva reserva = repositorioReserva.findById(idReserva).orElse(null);
+
+	    if (reserva != null) {
+	        if (reserva.getEstado().equals(false)) {
+	            reserva.setEstado(true);
+	            repositorioReserva.save(reserva);
+	            return "Pago registrado exitosamente.";
+	        } else if (reserva.getEstado().equals(true)) {
+	            return "La reserva ya estaba pagada.";
+	        } else {
+	            return "Error en el estado de la reserva.";
+	        }
+	    } else {
+	        return "Reserva no encontrada.";
+	    }
+	}
+	/*
 
 	@GetMapping("/modificar_datos/{idReserva}")
 	public Reserva modDatosReserva(@PathVariable Long idReserva) {
@@ -97,25 +124,7 @@ public class ControladorAdministrador {
 
 
 
-	@GetMapping("/registrar_pago/{idReserva}")
-	public String registrarPago(@PathVariable Long idReserva) {
->>>>>>> e482f2237fe521b2be8125fb7e4313acba4d1dfc
-	    Reserva reserva = repositorioReserva.findById(idReserva).orElse(null);
-
-	    if (reserva != null) {
-	        if (reserva.getEstado().equals("debe")) {
-	            reserva.setEstado("Pago");
-	            repositorioReserva.save(reserva);
-	            return "Pago registrado exitosamente.";
-	        } else if (reserva.getEstado().equals("pago")) {
-	            return "La reserva ya estaba pagada.";
-	        } else {
-	            return "Error en el estado de la reserva.";
-	        }
-	    } else {
-	        return "Reserva no encontrada.";
-	    }
-	}
+	
 	 @GetMapping("/reservas_del_dia_actual/{fecha}")
 	    public List<Object> obtenerReservasDelDiaActual(@PathVariable Date fecha) {
 	        return repositorioAdministrador.reservasDelDiaActual(fecha);

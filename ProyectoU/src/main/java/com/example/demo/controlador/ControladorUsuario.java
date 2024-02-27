@@ -85,7 +85,7 @@ public class ControladorUsuario {
 	
 	
 	@GetMapping("/cancelar_reserva/{id_reserva}")
-	public String cancelarReserva(@PathVariable Long id_reserva) {
+	public String cancelarReservaUsuario(@PathVariable Long id_reserva) {
 	    Reserva reserva = repositorioReserva.findById(id_reserva).orElse(null);
 	    
 	    if (reserva != null) {
