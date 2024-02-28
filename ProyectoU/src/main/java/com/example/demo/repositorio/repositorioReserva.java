@@ -19,5 +19,9 @@ public interface repositorioReserva extends JpaRepository<Reserva,Long>{
 
 	@Query(value = "SELECT * FROM reservas WHERE fecha_reserva = :fechaReserva", nativeQuery = true)
 	public List<Reserva> reservaPorDia(@Param("fechaReserva") LocalDate fechaReserva);
+	
+	@Query(value = "SELECT * FROM reservas WHERE id_lista_disponibilidad = :id_lista_disponibilidad", nativeQuery = true)
+	public List<Reserva> reservasPorListaDisponibilidad(@Param("id_lista_disponibilidad") Long id_lista_disponibilidad);
+
 
 }

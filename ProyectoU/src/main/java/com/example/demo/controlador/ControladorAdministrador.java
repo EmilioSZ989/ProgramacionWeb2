@@ -50,19 +50,15 @@ public class ControladorAdministrador {
 	        return "Administrador no encontrado";
 	    }
 	}
-	
 	@GetMapping("/listar_reservas")
 	public List<Reserva> listarReservaDia(){
 	    LocalDate fechaActual = LocalDate.now();
 	    return repositorioReserva.reservaPorDia(fechaActual);
 	}
-
 	@GetMapping("/listar_usuarios/{id_bus}")
 	public List<Usuario> listarUsuariosPorAutomovil(@PathVariable Long id_bus) {
 	    return repositorioUsuario.usuariosPorAutomovil(id_bus);
 	}
-	
-	@GetMapping("/cancelar_reserva/{id_reserva}")
 	public String cancelarReservaAdministrador(@PathVariable Long id_reserva) {
 	    Reserva reserva = repositorioReserva.findById(id_reserva).orElse(null);
 	    
@@ -74,8 +70,6 @@ public class ControladorAdministrador {
 	        return "No se encontró ninguna reserva con el ID " + id_reserva + ".";
 	    }
 	}
-	
-	
 	@GetMapping("/registrar_pago/{idReserva}")
 	public String registrarPago(@PathVariable Long idReserva) {
 	    Reserva reserva = repositorioReserva.findById(idReserva).orElse(null);
@@ -94,79 +88,69 @@ public class ControladorAdministrador {
 	        return "Reserva no encontrada.";
 	    }
 	}
-	
-	@GetMapping("/realizar_reserva/{id_lista_disponibilidad}")
-	public String realizarReservaAdmin(@PathVariable Long id_lista_disponibilidad) {
-	    String ms;
-	    // Datos de ejemplo para el usuario
-	    String nombre = "cris";
-	    String apellidos = "monte";
-	    Long cedula = 432506543L;
-	    String telefono = "3122345678";
-	    Date fechaNacimiento = Date.valueOf("2002-08-17"); // Corrección en el formato de la fecha
-	    
-	    // Obtener el cupo disponible de la lista de disponibilidad
-	    int cupoDisponible = repositorioListaDisponibilidad.buscarPorCupoDisponible(id_lista_disponibilidad);
-	    
-	    // Verificar si hay cupo disponible
-	    if (cupoDisponible > 0) {
-	        // Crear y guardar el usuario
-	        Usuario usuario = new Usuario();
-	        usuario.setCedula(cedula);
-	        usuario.setNombre(nombre);
-	        usuario.setApellidos(apellidos);
-	        usuario.setTelefono(telefono);
-	        usuario.setFechaNacimiento(fechaNacimiento);
-	        repositorioUsuario.save(usuario);
-	        
-	        // Obtener el usuario recién creado con su ID asignado
-	        usuario = repositorioUsuario.findById(cedula).orElse(null); // Modificado para manejar el caso de que el usuario no se encuentre
-	        
-	        if (usuario != null) { // Verificar si se encontró el usuario
-	            // Crear la reserva
-	            Reserva reserva = new Reserva();
-	            reserva.setNumeroPuesto(cupoDisponible); 
-	            reserva.setEstado(false); 
-	            reserva.setCedula(usuario); 
-	            reserva.setId_lista_disponibilidad(repositorioListaDisponibilidad.findById(id_lista_disponibilidad).orElse(null)); // Modificado para manejar el caso de que la lista de disponibilidad no se encuentre
-	            repositorioReserva.save(reserva);
-	            
-	            ms = "Su número de puesto es: " + cupoDisponible + " y tiene que pagar: " + reserva.getId_lista_disponibilidad().getTotalPagar();
-
-	            // Decrementar el cupo disponible
-	            cupoDisponible--;
-	            
-	            // Actualizar el cupo disponible en la lista de disponibilidad
-	            repositorioListaDisponibilidad.actualizarCupoDisponible(id_lista_disponibilidad, cupoDisponible);
-	            
-	            return ms;
-	        } else {
-	            return "Error al crear la reserva: no se encontró el usuario.";
-	        }
-	    } else if (cupoDisponible == 0) {
-	        repositorioListaDisponibilidad.deleteById(id_lista_disponibilidad);
-	        return "Error al crear la reserva: no hay cupo disponible.";
-	    }
-	    return null;
-	}
 	@GetMapping("/modificar_datos/{idReserva}")
 	public String modDatosReserva(@PathVariable Long idReserva) {
 	    // Buscar la reserva por su ID
 	    Reserva reserva = repositorioReserva.findById(idReserva).orElse(null);
 	    
 	    if (reserva != null) {
-	        int nuevoNumeroPuesto = 50;
-	        boolean nuevoEstado = false;
-	        reserva.setNumeroPuesto(nuevoNumeroPuesto);
-	        reserva.setEstado(nuevoEstado);
-	        repositorioReserva.save(reserva);
-	        
-	        return "Los datos de la reserva han sido modificados exitosamente.";
+	        // Obtener la lista de disponibilidad asociada a la reserva
+	        ListaDisponibilidad listaDisponibilidad = reserva.getId_lista_disponibilidad();
+	        if (listaDisponibilidad != null) {
+	            // Obtener el cupo de asientos disponibles en la lista de disponibilidad
+	            int cupoAsientos = listaDisponibilidad.getCupoDisponible();
+	            
+	            // Obtener la lista de reservas existentes para esta lista de disponibilidad
+	            List<Reserva> reservas = repositorioReserva.reservasPorListaDisponibilidad(listaDisponibilidad.getIdListaDisponibilidad());
+	            
+	            // Asignar el próximo número de puesto disponible
+	            int nuevoNumeroPuesto = asignarNumeroPuestoDisponible(reservas, cupoAsientos);
+	            
+	            // Verificar si se encontró un puesto disponible
+	            if (nuevoNumeroPuesto != -1) {
+	                // Modificar los datos de la reserva
+	                boolean nuevoEstado = true; // Podrías definir aquí el nuevo estado
+	                reserva.setNumeroPuesto(nuevoNumeroPuesto);
+	                reserva.setEstado(nuevoEstado);
+	                repositorioReserva.save(reserva);
+	                
+	                return "Los datos de la reserva han sido modificados exitosamente.";
+	            } else {
+	                return "No hay asientos disponibles para modificar la reserva.";
+	            }
+	        } else {
+	            return "La reserva no tiene una lista de disponibilidad asociada.";
+	        }
 	    } else {
 	        return "No se encontró ninguna reserva con el ID especificado.";
 	    }
 	}
 
+	public int asignarNumeroPuestoDisponible(List<Reserva> reservas, int cupoAsientos) {
+	    boolean[] asientosDisponibles = new boolean[cupoAsientos + 1];
+
+	    // Inicializar el array de asientos disponibles
+	    for (int i = 1; i <= cupoAsientos; i++) {
+	        asientosDisponibles[i] = true;
+	    }
+
+	    // Marcar los asientos ocupados por reservas existentes
+	    for (Reserva reserva : reservas) {
+	        if (reserva.getNumeroPuesto() > 0 && reserva.getNumeroPuesto() <= cupoAsientos) {
+	            asientosDisponibles[reserva.getNumeroPuesto()] = false;
+	        }
+	    }
+
+	    // Encontrar el próximo asiento disponible
+	    for (int i = 1; i <= cupoAsientos; i++) {
+	        if (asientosDisponibles[i]) {
+	            return i;
+	        }
+	    }
+
+	    // Si no hay asientos disponibles
+	    return -1;
+	}
 	
 }
 	

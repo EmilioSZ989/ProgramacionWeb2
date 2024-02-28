@@ -7,9 +7,10 @@ import org.springframework.data.repository.query.Param;
 import com.example.demo.modelo.Bus;
 
 public interface repositorioBus extends JpaRepository<Bus, Long>{
-	/*@Query("SELECT ld.idBus.cupoAsientos FROM ListaDisponibilidad ld WHERE ld.idListaDisponibilidad = :idListaDisponibilidad")
-	public int buscarPorCupoAsientos(@Param("idListaDisponibilidad") Long idListaDisponibilidad);*/
-
-
-
+    @Query(value="SELECT b.cupo_asientos " +  // Asegúrate de agregar espacios al final de cada línea
+            "FROM lista_disponibilidad ld " +
+            "JOIN buses b ON ld.id_automovil = b.id_bus " +
+            "WHERE ld.id_lista_disponibilidad = :idListaDisponibilidad", nativeQuery=true)
+    public int buscarPorCupoAsientos(@Param("idListaDisponibilidad") Long idListaDisponibilidad);
 }
+

@@ -42,13 +42,11 @@ public class Reserva {
         super();
     }
 
-    public Reserva(Long idReserva, int numeroPuesto, Boolean estado, LocalDate fechaReserva, Usuario cedula,
+    public Reserva(int numeroPuesto, Boolean estado,Usuario cedula,
             ListaDisponibilidad id_lista_disponibilidad) {
         super();
-        this.idReserva = idReserva;
         this.numeroPuesto = numeroPuesto;
         this.estado = estado;
-        this.fechaReserva = fechaReserva;
         this.cedula = cedula;
         this.id_lista_disponibilidad = id_lista_disponibilidad;
     }
