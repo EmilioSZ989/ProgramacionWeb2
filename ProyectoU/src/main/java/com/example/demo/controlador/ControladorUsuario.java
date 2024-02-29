@@ -35,13 +35,9 @@ public class ControladorUsuario {
 	    Long cedula = 123456543L;
 	    String telefono = "1234567890";
 	    Date fechaNacimiento = Date.valueOf("2004-04-08");
-	    int cupoDisponible = 30;
-
-	    try {
-	        cupoDisponible = repositorioListaDisponibilidad.buscarPorCupoDisponible(id_lista_disponibilidad);
-	    } catch(Exception error) {
-	        // Manejar la excepción si es necesario
-	    }
+	    
+	    int cupoDisponible = repositorioListaDisponibilidad.buscarPorCupoDisponible(id_lista_disponibilidad);
+	    
 	    
 	    int cupoAsientos = repositorioBus.buscarPorCupoAsientos(id_lista_disponibilidad);
 
@@ -60,7 +56,7 @@ public class ControladorUsuario {
 	        List<Reserva> reservas = repositorioReserva.reservasPorListaDisponibilidad(id_lista_disponibilidad);
 
 	        // Asignar el próximo número de puesto disponible
-	        int numeroPuesto = asignarNumeroPuestoDisponible(reservas, cupoAsientos);
+	        int numeroPuesto = repositorioReserva.asignarNumeroPuestoDisponible(reservas, cupoAsientos);
 
 	        if (numeroPuesto != -1) {
 	            // Crear la reserva y asignar el número de puesto
@@ -114,30 +110,6 @@ public class ControladorUsuario {
 	}
 
 
-	public int asignarNumeroPuestoDisponible(List<Reserva> reservas, int cupoAsientos) {
-	    boolean[] asientosDisponibles = new boolean[cupoAsientos + 1];
-
-	    // Inicializar el array de asientos disponibles
-	    for (int i = 1; i <= cupoAsientos; i++) {
-	        asientosDisponibles[i] = true;
-	    }
-
-	    // Marcar los asientos ocupados por reservas existentes
-	    for (Reserva reserva : reservas) {
-	        if (reserva.getNumeroPuesto() > 0 && reserva.getNumeroPuesto() <= cupoAsientos) {
-	            asientosDisponibles[reserva.getNumeroPuesto()] = false;
-	        }
-	    }
-
-	    // Encontrar el próximo asiento disponible
-	    for (int i = 1; i <= cupoAsientos; i++) {
-	        if (asientosDisponibles[i]) {
-	            return i;
-	        }
-	    }
-
-	    // Si no hay asientos disponibles
-	    return -1;
-	}
+	
 
 }
