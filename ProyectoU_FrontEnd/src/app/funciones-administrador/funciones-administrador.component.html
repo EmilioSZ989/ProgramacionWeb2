@@ -1,0 +1,12 @@
+<button class="btn btn-primary" (click)="abrirConBoton('container_listas')">Realizar Reserva</button>
+<button class="btn btn-primary" (click)="abrirConBoton('modificador_reserva')">Modificar Datos de Reserva</button>
+<button class="btn btn-primary" (click)="abrirConBoton('consultor-reservas-por-dia')">Reservas del Día</button>
+<button class="btn btn-primary" (click)="abrirConBoton('registro-pago')">Registrar Pago de Reserva</button>
+<button class="btn btn-primary" (click)="abrirConBoton('consultor-usuarios-por-bus')">Usuarios de un Automóvil</button>
+
+<app-modal-consulta-reserva></app-modal-consulta-reserva>
+<app-lista-disponibilida id="container_listas"></app-lista-disponibilida>
+<app-modal-modificar-reserva></app-modal-modificar-reserva>
+<app-modal-usuario-por-bus></app-modal-usuario-por-bus>
+<app-modal-reservas-por-dia></app-modal-reservas-por-dia>
+<app-modal-registro-pago></app-modal-registro-pago>

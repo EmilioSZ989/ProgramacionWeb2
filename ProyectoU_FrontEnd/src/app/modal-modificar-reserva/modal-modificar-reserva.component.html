@@ -1,0 +1,29 @@
+<div class="modal" tabindex="-1" id="modificador_reserva">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modificar los datos de la reserva</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModificador()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label" for="num_reserva"># reserva: </label>
+            <input placeholder="Ingrese el número de reserva" type="text" class="form-control" id="num_reserva" name="num_reserva">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="num_puesto"># puesto: </label>
+            <input placeholder="Ingrese el número de puesto" type="text" class="form-control" id="num_puesto" name="num_puesto">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="estado">Estado: </label>
+            <input placeholder="Ingrese el estado" type="text" class="form-control" id="estado" name="estado">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="modificarReserva()">Actualizar datos</button>  
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

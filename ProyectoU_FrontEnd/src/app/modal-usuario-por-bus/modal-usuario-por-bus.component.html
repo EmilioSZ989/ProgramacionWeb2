@@ -1,0 +1,44 @@
+<div class="modal" tabindex="-1" id="consultor-usuarios-por-bus">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Consulta los Usuarios por bus</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarConsultor()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label class="form-label" for="num_bus"># Bus: </label>
+              <input placeholder="Ingrese el número de bus" type="number" class="form-control" id="num_bus" name="num_bus">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" (click)="buscarUsuariosPorbus()">Buscar usuarios</button>  
+            </div>
+          </form>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Cédula</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Apellidos</th>
+                  <th scope="col">Fecha de nacimiento</th>
+                  <th scope="col">Teléfono</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>mdo</td>
+                  <td>mdo</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

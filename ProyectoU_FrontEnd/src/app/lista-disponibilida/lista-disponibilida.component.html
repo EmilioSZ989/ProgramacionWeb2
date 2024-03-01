@@ -1,0 +1,49 @@
+<h1>Lista de viajes disponibles!</h1>
+<div class="form-container" id="container_listas">
+  <div class="form-group">
+      <label for="exampleFormControlSelect1">Selecciona destino:</label>
+      <select class="form-control" id="exampleFormControlSelect1">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+      </select>
+  </div>
+  <div class="form-group">
+      <label for="exampleFormControlSelect2">Selecciona fecha:</label>
+      <select class="form-control" id="exampleFormControlSelect2">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+      </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Filtrar Selección</button>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Cupo disponible</th>
+            <th scope="col">Destino</th>
+            <th scope="col">Fecha de salida</th>
+            <th scope="col">Hora de salida</th>
+            <th scope="col">Precio</th>
+            <th scope="col">¡Reserva ahora!</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>mdo</td>
+            <td>mdo</td>
+            <td>mdo</td>
+            <td><button class="btn btn-primary" (click)="abrirReservador()">Escoger</button></td>
+        </tr>
+    </tbody>
+</table>
+<app-modal-usuario-reserva></app-modal-usuario-reserva>

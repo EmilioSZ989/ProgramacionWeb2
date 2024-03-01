@@ -1,0 +1,57 @@
+<button class="btn btn-primary" (click)="abrirConsultor()">Consultar Reserva</button>
+
+<div class="modal" tabindex="-1" id="consultor-reserva">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Consulta tu reserva:</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarConsultor()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Cédula: </label>
+            <input placeholder="Ingrese su cédula" type="number" class="form-control"  name="id">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="consultarReserva()">Consultar Reserva</button>  
+          </div>
+        </form>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"># Reserva</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Fecha Reserva</th>
+                <th scope="col"># Asiento</th>
+                <th scope="col">Cédula</th>
+                <th scope="col"># de viaje</th>
+                <th scope="col">Destino</th>
+                <th scope="col">Fecha de salida</th>
+                <th scope="col">Hora de salida</th>
+                <th scope="col">Valor de pasaje</th>
+                <th scope="col">¡Cancela tu reserva!</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>mdo</td>
+                <td>mdo</td>
+                <td>mdo</td>
+                <td>mdo</td>
+                <td>mdo</td>
+                <td>mdo</td>
+                <td>mdo</td>
+                <td><button type="submit" class="btn btn-primary">Cancelar</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

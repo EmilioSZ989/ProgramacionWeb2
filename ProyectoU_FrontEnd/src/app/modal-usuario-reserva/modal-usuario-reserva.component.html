@@ -1,0 +1,37 @@
+<div class="modal" tabindex="-1" id="reservador">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">¡Ya casi terminas tu reserva!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarReservador()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label" for="nombre">Nombre:</label>
+            <input placeholder="Ingrese su nombre" type="text" class="form-control" id="nombre" name="nombre">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="apellidos">Apellidos:</label>
+            <input placeholder="Ingrese sus apellidos" type="text" class="form-control" id="apellidos" name="apellidos">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="cedula">Cédula:</label>
+            <input placeholder="Ingrese su cédula" type="number" class="form-control" id="cedula" name="id">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="fechaNacimiento">Fecha de Nacimiento:</label>
+            <input placeholder="Ingrese su fecha de nacimiento" type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="telefono">Teléfono:</label>
+            <input placeholder="Ingrese su teléfono" type="tel" class="form-control" id="telefono" name="telefono">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" (click)="realizarReservacion()">Reservar</button>  
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -81,9 +81,8 @@ public class ControladorUsuario {
 
 	
 	@GetMapping("/consultar_reserva/{cedula}")
-	public List<Reserva> consultarReservaUsuario(@PathVariable Long cedula){
-		return repositorioReserva.reservasPorUsuario(cedula);
-		
+	public List<Object[]> consultarReservaUsuario(@PathVariable Long cedula) {
+	    return repositorioReserva.reservasPorUsuario(cedula);
 	}
 	
 	

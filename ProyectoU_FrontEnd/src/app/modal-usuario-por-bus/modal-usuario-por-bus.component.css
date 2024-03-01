@@ -1,0 +1,38 @@
+/* Estilos para la tabla responsive */
+.table-responsive {
+    overflow-x: auto;
+  }
+  
+  /* Estilo para ajustar el tamaño del modal al contenido de la tabla */
+  .modal-dialog {
+    max-width: 90%; /* Modifica el ancho máximo según tus necesidades */
+  }
+  
+  /* Estilo para mejorar la apariencia de los encabezados de la tabla */
+  .table thead th {
+    white-space: nowrap; /* Evita el ajuste de texto en el encabezado */
+    overflow: hidden; /* Oculta el contenido que se desborda del encabezado */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) cuando el contenido se desborda */
+  }
+  
+  /* Estilos personalizados para el formulario dentro del modal */
+  .modal-body form {
+    display: flex; /* Usa flexbox para alinear los elementos */
+    align-items: center; /* Alinea verticalmente los elementos */
+  }
+  
+  /* Estilos para el input de cédula */
+  .modal-body form .form-label {
+    flex: 0 0 auto; /* Establece el tamaño del label de cédula */
+    margin-right: 10px; /* Agrega un margen derecho */
+  }
+  
+  .modal-body form .form-control {
+    flex: 1; /* El input ocupará todo el espacio restante */
+  }
+  
+  /* Estilos para los botones dentro del formulario */
+  .modal-body form .btn-group {
+    margin-left: auto; /* Los botones se colocarán al final del contenedor */
+  }
+  

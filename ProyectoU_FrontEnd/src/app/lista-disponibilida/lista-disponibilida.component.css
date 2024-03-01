@@ -1,0 +1,45 @@
+/* Estilos para el formulario de selección de destino y fecha */
+.form-group {
+    margin-bottom: 1rem; /* Añade espacio entre los grupos de formulario */
+    display: flex; /* Hace que los elementos dentro del formulario se alineen en línea */
+}
+
+/* Estilos para los select dentro del formulario */
+/* Estilos para los select dentro del formulario */
+.form-group select {
+    flex: 0 0 150px; /* Establece un ancho máximo para los select */
+    margin-right: 1rem; /* Añade espacio entre los select */
+}
+
+
+/* Estilos para el botón de "Filtrar Selección" */
+.btn-primary {
+    margin-bottom: 1rem; /* Añade espacio debajo del botón */
+}
+
+
+/* Estilos para la tabla */
+.table {
+    width: 100%; /* Hace que la tabla ocupe todo el ancho disponible */
+    margin-bottom: 1rem; /* Añade espacio debajo de la tabla */
+}
+
+/* Estilos para los encabezados de la tabla */
+.table thead th {
+    white-space: nowrap; /* Evita el ajuste de texto en el encabezado */
+    overflow: hidden; /* Oculta el contenido que se desborda del encabezado */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos (...) cuando el contenido se desborda */
+    text-align: center; /* Centra el texto en los encabezados */
+}
+
+/* Estilos para las celdas de la tabla */
+.table tbody th,
+.table tbody td {
+    vertical-align: middle; /* Centra el contenido verticalmente en las celdas */
+    text-align: center; /* Centra el texto en las celdas */
+}
+
+/* Estilos para el botón "Escoger" dentro de la tabla */
+.table tbody button {
+    width: 100%; /* Hace que el botón ocupe todo el ancho de la celda */
+}

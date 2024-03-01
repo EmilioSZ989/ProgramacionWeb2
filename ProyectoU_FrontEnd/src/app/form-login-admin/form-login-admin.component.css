@@ -1,0 +1,28 @@
+/* Estilos para el formulario de inicio de sesión */
+.form-group {
+    margin-bottom: 1.5rem; /* Espaciado entre los grupos de formulario */
+}
+
+.form-control {
+    border-radius: 0.5rem; /* Bordes redondeados para los campos de entrada */
+}
+
+.btn-primary {
+    border-radius: 0.5rem; /* Bordes redondeados para el botón de inicio de sesión */
+    width: 100%; /* Ancho completo para el botón */
+}
+
+h2 {
+    text-align: center; /* Centra el título del formulario */
+    margin-bottom: 2rem; /* Espacio inferior para el título */
+}
+
+.login-form {
+    max-width: 350px; /* Ancho máximo del formulario */
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    padding: 2rem; /* Espaciado interno del formulario */
+    border: 1px solid #ccc; /* Borde del formulario */
+    border-radius: 1rem; /* Bordes redondeados para el formulario */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background-color: #f9f9f9; /* Color de fondo */
+}

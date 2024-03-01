@@ -15,8 +15,12 @@ import com.example.demo.modelo.Reserva;
 @Repository
 public interface repositorioReserva extends JpaRepository<Reserva,Long>{
 	
-	@Query(value = "SELECT * FROM reservas WHERE cedula = :cedula", nativeQuery = true)
-	public List<Reserva> reservasPorUsuario(@Param("cedula") Long cedula);
+	@Query(value = "SELECT r.*, ld.destino, ld.fecha, ld.hora_salida, ld.total_pagar " +
+	        "FROM reservas r " +
+	        "JOIN lista_disponibilidad ld ON r.id_lista_disponibilidad = ld.id_lista_disponibilidad " +
+	        "WHERE r.cedula = :cedula", nativeQuery = true)
+	public List<Object[]> reservasPorUsuario(@Param("cedula") Long cedula);
+
 
 	@Query(value = "SELECT * FROM reservas WHERE fecha_reserva = :fechaReserva", nativeQuery = true)
 	public List<Reserva> reservaPorDia(@Param("fechaReserva") LocalDate fechaReserva);
