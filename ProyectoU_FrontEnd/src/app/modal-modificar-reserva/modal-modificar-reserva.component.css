@@ -1,0 +1,25 @@
+/* Estilo para el fondo del modal */
+.modal-content {
+    background-image: url('https://img.freepik.com/foto-gratis/concepto-viaje-puntos-referencia_23-2149153261.jpg?t=st=1709331981~exp=1709335581~hmac=ccf39c78e2307476874b487dca671aca934a8f0a17a527c67d7d7ebfd9b26ee9&w=360'); /* Ruta de tu imagen de fondo */
+    background-size: cover; /* La imagen cubrirá todo el contenido */
+    background-position: center; /* La imagen estará centrada */
+  }
+  
+  /* Estilo para el título del modal */
+.modal-title {
+    font-weight: bold; /* Hacer que el título esté en negrita */
+    font-family: "Helvetica Now", sans-serif; /* Tipo de letra */
+    color: #004d99; /* Color del texto */
+    text-shadow: 2px 2px 4px #004d99; /* Sombra de texto */
+  }
+  
+  /* Estilo para todo el texto dentro del modal, excepto el texto dentro de las etiquetas <label> */
+  .modal-body, .modal-footer, .btn-primary {
+    font-weight: bold; /* Hacer que todo el texto esté en negrita */
+  }
+  
+  /* Estilo para el texto dentro de las etiquetas <label> */
+  .modal-body label {
+    font-weight: bold; /* Restaurar el peso de la fuente normal dentro de las etiquetas <label> */
+  }
+  

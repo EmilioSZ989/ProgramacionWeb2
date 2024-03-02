@@ -1,22 +1,12 @@
-/* Estilos para el formulario de inicio de sesión */
-.form-group {
-    margin-bottom: 1.5rem; /* Espaciado entre los grupos de formulario */
+
+h2.text-center {
+    font-family: "Helvetica Now", sans-serif; /* Fuente del título */
+    color: #004d99; /* Azul oscuro */
+    font-weight: bold; /* Hacer que el título esté en negrita */
+    text-shadow: 2px 2px 4px #004d99; /* Sombra de texto */
 }
 
-.form-control {
-    border-radius: 0.5rem; /* Bordes redondeados para los campos de entrada */
-}
-
-.btn-primary {
-    border-radius: 0.5rem; /* Bordes redondeados para el botón de inicio de sesión */
-    width: 100%; /* Ancho completo para el botón */
-}
-
-h2 {
-    text-align: center; /* Centra el título del formulario */
-    margin-bottom: 2rem; /* Espacio inferior para el título */
-}
-
+/* Estilos generales para el formulario de inicio de sesión */
 .login-form {
     max-width: 350px; /* Ancho máximo del formulario */
     margin: 0 auto; /* Centra el formulario horizontalmente */
@@ -24,5 +14,44 @@ h2 {
     border: 1px solid #ccc; /* Borde del formulario */
     border-radius: 1rem; /* Bordes redondeados para el formulario */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    background-color: #f9f9f9; /* Color de fondo */
+    background-color: #ffffff; /* Color de fondo */
 }
+
+/* Estilos para el título del formulario */
+.login-form h2 {
+    text-align: center; /* Centra el título del formulario */
+    margin-bottom: 2rem; /* Espacio inferior para el título */
+    color: #004d99; /* Color del texto */
+}
+
+/* Estilos para los grupos de formulario */
+.login-form .form-group {
+    margin-bottom: 1.5rem; /* Espaciado inferior entre los grupos de formulario */
+}
+
+/* Estilos para los campos de entrada */
+.login-form .form-control {
+    border-radius: 0.5rem; /* Bordes redondeados para los campos de entrada */
+}
+
+/* Estilos para el botón de inicio de sesión */
+.login-form .btn-primary {
+    border-radius: 0.5rem; /* Bordes redondeados para el botón de inicio de sesión */
+    width: 100%; /* Ancho completo para el botón */
+    background-color: #004d99; /* Color de fondo del botón */
+    border: none; /* Elimina el borde del botón */
+    color: #ffffff; /* Color del texto del botón */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+.login-form .btn-primary:hover {
+    background-color: #003366; /* Cambia el color de fondo al pasar el cursor sobre el botón */
+    color: #ffffff; /* Cambia el color del texto al pasar el cursor sobre el botón */
+}
+.form-group label {
+    font-weight: bold; /* Hacer que el texto esté en negrita */
+}
+.form-group {
+    margin-bottom: 20px; /* Aumenta el espacio entre los grupos de formulario */
+}
+

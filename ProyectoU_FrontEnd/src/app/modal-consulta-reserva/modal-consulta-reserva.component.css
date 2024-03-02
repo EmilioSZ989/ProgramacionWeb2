@@ -1,4 +1,11 @@
 /* Estilos para la tabla responsive */
+.modal-title {
+  font-family: "Helvetica Now", sans-serif; /* Cambia el tipo de letra */
+  font-weight: bold; /* Hace que el texto esté en negrita */
+  color: #004d99; /* Azul oscuro */
+  text-shadow: 1px 1px 3px #004d99; /* Sombra de texto */
+}
+
 .table-responsive {
   overflow-x: auto;
 }
@@ -25,6 +32,8 @@
 .modal-body form .form-label {
   flex: 0 0 auto; /* Establece el tamaño del label de cédula */
   margin-right: 10px; /* Agrega un margen derecho */
+  font-family: "Helvetica Now", sans-serif; /* Cambia el tipo de letra */
+    font-weight: bold; /* Hace que el texto esté en negrita */
 }
 
 .modal-body form .form-control {
@@ -35,3 +44,29 @@
 .modal-body form .btn-group {
   margin-left: auto; /* Los botones se colocarán al final del contenedor */
 }
+/* Estilo para el fondo del modal */
+.modal-content {
+  background-color: #C5E1A5; /* Color de fondo suave */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+/* Estilos para todos los botones */
+.btn {
+  padding: 10px 20px; /* Ajusta el relleno de los botones */
+  border-radius: 5px; /* Agrega bordes redondeados a los botones */
+  background-color: #007bff; /* Cambia el color de fondo de los botones */
+  color: #ffffff; /* Cambia el color del texto de los botones a blanco */
+  border: none; /* Elimina el borde de los botones */
+  cursor: pointer; /* Cambia el cursor al pasar sobre los botones */
+  transition: background-color 0.3s, color 0.3s; /* Agrega una transición suave al color de fondo y al color del texto */
+  font-weight: bold; /* Hacer que el texto del botón esté en negrita */
+}
+
+.btn:hover {
+  background-color: #0056b3; /* Cambia el color de fondo al pasar el cursor sobre los botones */
+}
+/* Estilos para los encabezados de la tabla dentro del modal */
+.modal-body table thead th {
+  background-color: #E0E0E0 ; /* Color de fondo para los encabezados de la tabla */
+}
+

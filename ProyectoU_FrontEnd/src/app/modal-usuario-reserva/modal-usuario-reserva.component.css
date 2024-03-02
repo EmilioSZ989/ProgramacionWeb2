@@ -11,17 +11,22 @@
 /* Estilos para los campos de entrada */
 .form-control {
   margin-bottom: 15px;
+  
 }
 
 /* Estilos para el botón de "Consultar Reserva" */
 .modal-footer .btn-primary {
   width: 100%;
+  font-weight: bold;
 }
 
 /* Estilos para el encabezado del modal */
 .modal-title {
   font-size: 1.5rem;
   margin-bottom: 20px;
+  font-weight: bold;
+  color: #004d99; /* Azul oscuro */
+  text-shadow: 1px 1px 3px #004d99; /* Sombra de texto */
 }
 
 /* Estilos para el botón de cerrar */
@@ -29,22 +34,30 @@
   position: absolute;
   top: 10px;
   right: 10px;
+  font-weight: bold;
+
 }
 
 /* Estilos generales para el modal */
 .modal-content {
+  background-image: url('https://img.freepik.com/foto-gratis/concepto-viaje-puntos-referencia_23-2149153261.jpg?t=st=1709331981~exp=1709335581~hmac=ccf39c78e2307476874b487dca671aca934a8f0a17a527c67d7d7ebfd9b26ee9&w=360'); /* Ruta de la imagen de fondo */
+  background-size: cover; /* La imagen cubrirá todo el contenido del modal */
+  background-position: center; /* La imagen estará centrada */
   border-radius: 10px;
+  font-weight: bold;
 }
 
 /* Estilos para el cuerpo del modal */
 .modal-body {
   padding: 20px;
+  font-weight: bold;
 }
 
 /* Estilos para el pie del modal */
 .modal-footer {
   padding: 20px;
   justify-content: center;
+  font-weight: bold;
 }
 
 /* Estilos para el modal */
@@ -58,6 +71,7 @@
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
+  font-weight: bold;
 }
 
 /* Estilos para el contenido del modal */
@@ -67,6 +81,7 @@
   max-width: 500px;
   background-color: #fff;
   border-radius: 10px;
+  font-weight: bold;
 }
 
 /* Estilos para el contenido del modal en pantallas pequeñas */
@@ -74,4 +89,9 @@
   .modal-dialog {
     width: 90%;
   }
+}
+/* Estilos generales para el modal */
+.modal-content {
+  border-radius: 10px;
+  background-color: #C5E1A5; /* Color de fondo del modal */
 }

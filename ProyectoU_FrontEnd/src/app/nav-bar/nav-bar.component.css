@@ -1,0 +1,28 @@
+.navbar {
+    margin-bottom: 20px; /* Agrega un margen en la parte inferior del navbar */
+    background-color: #eef2f7; /* Color de fondo del navbar */
+    font-family: "Helvetica", sans-serif; /* Cambia el tipo de letra del navbar a Helvetica */
+    font-weight: bold; /* Hace que el texto del navbar sea negrita */
+}
+
+.navbar-brand {
+    color: #004d99; /* Color del texto del navbar-brand */
+    margin-left: auto; /* Alinea el navbar-brand a la derecha */
+}
+
+.navbar-nav .nav-link {
+    color: #000000; /* Color del texto de los enlaces del navbar */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #004d99; /* Cambia el color del texto al pasar el ratón por encima */
+}
+.navbar-container {
+    margin-top: 20px; /* Margen en la parte superior del contenedor del navbar */
+    background-color: #007cc7 !important; /* Color de fondo del contenedor del navbar */
+}
+.navbar-nav {
+    margin-left: auto; /* Mueve los elementos del navbar hacia la derecha */
+    padding-right: 15px; /* Agrega espacio entre los elementos del navbar y el borde derecho */
+}
+
