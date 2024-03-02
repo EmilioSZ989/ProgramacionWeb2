@@ -1,0 +1,38 @@
+.jumbotron {
+    background-color: #e6eaec; /* Color de fondo */
+    padding: 4rem 2rem; /* Espaciado interno */
+    border-radius: 0.5rem; /* Bordes redondeados */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.jumbotron h1 {
+    font-family: "Helvetica Now", sans-serif; /* Fuente del título */
+    color: #004d99; /* Azul oscuro */
+    font-weight: bold; /* Hacer que el título esté en negrita */
+    text-shadow: 2px 2px 4px #004d99; /* Sombra de texto */
+    
+}
+
+.jumbotron p {
+    color: #343a40; /* Gris oscuro */
+    font-family: "Helvetica", sans-serif; /* Fuente del título */
+}
+
+/* Estilo para la imagen */
+.img {
+    width: 100%; /* Ajusta el ancho de la imagen al 100% del contenedor */
+    max-width: 600px; /* Limita el ancho máximo de la imagen */
+    height: auto; /* Permite que la altura se ajuste automáticamente para mantener la proporción */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    display: block; /* Hace que la imagen sea un elemento de bloque */
+    margin: 0 auto 20px; /* Alinea la imagen al centro y agrega un margen inferior */
+    transition: transform 0.2s ease; /* Agrega una transición suave al cambio de tamaño */
+}
+
+/* Efecto de selección al pasar el cursor sobre la imagen */
+.img:hover {
+    transform: scale(1.05); /* Aumenta ligeramente el tamaño de la imagen al 105% */
+}
+
+

@@ -2,4 +2,52 @@
 #container_listas {
     display: none;
   }
-  
+  /* Estilos generales para los botones */
+.btn-primary {
+  display: block; /* Mostrar los botones como bloques */
+  width: 100%; /* Ancho completo */
+  padding: 10px 20px; /* Ajustar el relleno */
+  margin-bottom: 10px; /* Separación entre botones */
+  border-radius: 5px; /* Bordes redondeados */
+  background-color: #007bff; /* Color de fondo */
+  color: #ffffff; /* Color del texto */
+  border: none; /* Borde */
+  cursor: pointer; /* Cambiar el cursor */
+  transition: background-color 0.3s, color 0.3s; /* Transición suave */
+  font-weight: bold; /* Texto en negrita */
+}
+
+/* Estilos al pasar el cursor sobre los botones */
+.btn-primary:hover {
+  background-color: #0056b3; /* Cambio de color de fondo */
+}
+
+/* Estilo adicional para el último botón */
+.btn-primary:last-child {
+  margin-bottom: 0; /* Elimina el margen inferior del último botón */
+}
+
+/* Ajuste de tamaño específico para el botón "Consultar Reserva" */
+.btn-primary.consultar-reserva {
+  width: auto; /* Ancho automático */
+}
+
+/* Estilos para el botón "Consultar Reserva" */
+.button[data-bs-target="#consultarReservaModal"] {
+  /* Ajusta el tamaño del botón según sea necesario */
+  width: 200px;
+  height: 50px;
+  /* Otros estilos personalizados */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Cambia el color de fondo al pasar el cursor sobre el botón */
+.button[data-bs-target="#consultarReservaModal"]:hover {
+  background-color: #0056b3;
+}

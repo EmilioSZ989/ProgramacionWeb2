@@ -1,0 +1,14 @@
+.modal-content {
+    background-color: #C5E1A5; /* Color de fondo del modal */
+  }
+  .btn {
+    font-weight: bold; /* Hacer que el texto del botón esté en negrita */
+  }
+  .modal-title {
+    color: #004d99; /* Color del texto */
+    font-family: "Helvetica Now", sans-serif; /* Tipo de letra */
+    text-shadow: 1px 1px 3px #004d99; /* Sombra de texto */
+  }
+  .form-label {
+    font-weight: bold; /* Aplicar negrita */
+  }

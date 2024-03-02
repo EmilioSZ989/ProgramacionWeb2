@@ -35,4 +35,20 @@
   .modal-body form .btn-group {
     margin-left: auto; /* Los botones se colocarán al final del contenedor */
   }
+  /* Estilos para el título del modal */
+.modal-title {
+  font-family: "Helvetica Now", sans-serif; /* Tipo de letra */
+  color: #004d99; /* Color del texto */
+  text-shadow: 1px 1px 3px #004d99; /* Sombra de texto */
+}
+/* Estilos generales para el contenido del modal */
+.modal-content {
+  background-color: #C5E1A5; /* Color de fondo del modal */
+}
+.modal-body table thead th {
+  background-color: #E0E0E0 ; /* Color de fondo para los encabezados de la tabla */
+}
+
+
+
   
