@@ -11,8 +11,6 @@ import { ModalUsuarioReservaComponent } from '../modal-usuario-reserva/modal-usu
 export class ListaDisponibilidaComponent implements OnInit{
   ngOnInit(): void {
   }
-  @Input() 
-
   abrirReservador(){
     const modal = document.getElementById("reservador");
     if (modal!=null) {
