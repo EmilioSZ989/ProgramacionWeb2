@@ -5,8 +5,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +24,7 @@ import com.example.demo.repositorio.*;
 
 @RestController
 @RequestMapping("/administrador")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class ControladorAdministrador {
 	@Autowired
 	private repositorioAdministrador repositorioAdministrador;
@@ -35,19 +39,16 @@ public class ControladorAdministrador {
 	@Autowired
 	private repositorioUsuario repositorioUsuario;
 
-	@GetMapping("/ingresar_plataforma/{Usuario}-{contraseña}")
-	public String ingresarPlataforma(@PathVariable String Usuario, @PathVariable String contraseña) {
-		Administrador admin = repositorioAdministrador.findById(Long.valueOf(1)).orElse(null);
-		if (admin != null) {
-			if (admin.getNombreUsuario().equals(Usuario) && admin.getContrasenia().equals(contraseña)) {
-				return "Inicio de sesión exitoso";
-			} else {
-				return "Nombre de usuario o contraseña incorrectos";
-			}
-		} else {
-			return "Administrador no encontrado";
-		}
+	@PostMapping("/ingresar_plataforma")
+	public boolean ingresarPlataforma(@RequestBody List<String> credencialesUsuario) {
+	    Administrador admin = repositorioAdministrador.findById(Long.valueOf(1)).orElse(null);
+	    if (admin != null) {
+	        return admin.getNombreUsuario().equals(credencialesUsuario.get(0)) && admin.getContrasenia().equals(credencialesUsuario.get(1));
+	    } else {
+	        return false; // Si el administrador no es encontrado, se devuelve false
+	    }
 	}
+
 
 	@GetMapping("/listar_reservas")
 	public List<Reserva> listarReservaDia() {
