@@ -1,34 +1,65 @@
 import { Component, OnInit } from '@angular/core';
+import { ReservaService } from '../servicios/reserva.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Reserva } from '../entities/reserva';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-modal-consulta-reserva',
   standalone: true,
-  imports: [],
+  imports: [CommonModule,FormsModule, RouterOutlet],
   templateUrl: './modal-consulta-reserva.component.html',
   styleUrl: './modal-consulta-reserva.component.css'
 })
-export class ModalConsultaReservaComponent implements OnInit{
+export class ModalConsultaReservaComponent implements OnInit {
+  reservas: Reserva[]; // Inicializamos como un array vacío
+  cedula: number;
+  constructor(private reservaServicio: ReservaService) { }
+
   ngOnInit(): void {
   }
-  abrirConsultor(){
+
+  abrirConsultor() {
     const modal = document.getElementById("consultor-reserva");
-    if (modal!=null) {
-      modal.style.display="block";
+    if (modal != null) {
+      modal.style.display = "block";
     } else {
       alert("Error al abrir consultor de reservas");
     }
   }
 
-  cerrarConsultor(){
-    const modal= document.getElementById("consultor-reserva");
-    if (modal!=null) {
-      modal.style.display="none";
+  cerrarConsultor() {
+    const modal = document.getElementById("consultor-reserva");
+    if (modal != null) {
+      modal.style.display = "none";
     } else {
       alert("Error al cerrar el consultor de reservas");
     }
   }
 
-  consultarReserva(){
-
+  consultarReserva(cedula: number) {
+    this.reservaServicio.obtenerReservaCedula(cedula)
+      .subscribe(
+        (data: Reserva[]) => {
+          this.reservas = data;
+          console.log(data);
+        },
+        error => {
+          console.error("Error al consultar la reserva:", error);
+        }
+      );
   }
+  cancelarReservaUsuario(idReserva:number){
+    this.reservaServicio.cancelarReservaUsuario(idReserva).subscribe(
+      ()=>{
+        this.consultarReserva(this.cedula);
+      },
+      error => {
+        console.error('Error al eliminar empleado:', error);
+      }
+    )
+  }
+  
 }
+
