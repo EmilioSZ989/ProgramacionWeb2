@@ -42,24 +42,35 @@ export class ModalConsultaReservaComponent implements OnInit {
     this.reservaServicio.obtenerReservaCedula(cedula)
       .subscribe(
         (data: Reserva[]) => {
-          this.reservas = data;
-          console.log(data);
+          if (data && data.length > 0) {
+            this.reservas = data;
+            console.log(data);
+          } else {
+            alert("No se encontraron reservas para la cédula proporcionada.");
+          }
         },
         error => {
           console.error("Error al consultar la reserva:", error);
         }
       );
   }
-  cancelarReservaUsuario(idReserva:number){
-    this.reservaServicio.cancelarReservaUsuario(idReserva).subscribe(
-      ()=>{
-        this.consultarReserva(this.cedula);
-      },
-      error => {
-        console.error('Error al eliminar empleado:', error);
-      }
-    )
+  
+  cancelarReservaUsuario(idReserva: number) {
+    const confirmacion = confirm("¿Está seguro que desea cancelar la reserva?");
+    if (confirmacion) {
+      this.reservaServicio.cancelarReservaUsuario(idReserva).subscribe(
+        () => {
+          this.consultarReserva(this.cedula);
+          alert("La reserva ha sido cancelada exitosamente.");
+        },
+        error => {
+          console.error('Error al eliminar empleado:', error);
+        }
+      );
+    }
   }
+  
+  
   
 }
 
