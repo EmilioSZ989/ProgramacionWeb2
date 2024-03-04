@@ -74,37 +74,51 @@ public class ControladorAdministrador {
 	    }
 	}
 
-	@GetMapping("/modificar_datos/{idReserva}")
-	public String modDatosReserva(@PathVariable Long idReserva) {
-		// Buscar la reserva por su ID
-		Reserva reserva = repositorioReserva.findById(idReserva).orElse(null);
-		Long id_lista_disponibilidad = reserva.getId_lista_disponibilidad().getIdListaDisponibilidad();
-		// Obtener la lista de disponibilidad asociada a la reserva desde la base de
-		// datos
-		List<Reserva> reservas = repositorioReserva.reservasPorListaDisponibilidad(id_lista_disponibilidad);
+	@PostMapping("/modificar_datos")
+	public boolean modificarDatosReserva(@RequestBody Reserva reserva) {
+	    if (reserva != null) {
+	        Long idReserva = reserva.getIdReserva();
+	        
+	        // Buscar la reserva por su ID
+	        Reserva reservaExistente = repositorioReserva.findById(idReserva).orElse(null);
 
-		if (!reservas.isEmpty()) {
-			// buscar el cupo de asietnos que tiene la buseta.
-			int cupoAsientos = repositorioBus.buscarPorCupoAsientos(id_lista_disponibilidad);
+	        if (reservaExistente != null) {
+	            Long idListaDisponibilidad = reservaExistente.getId_lista_disponibilidad().getIdListaDisponibilidad();
 
-			// Asignar el próximo número de puesto disponible
-			int nuevoNumeroPuesto = repositorioReserva.asignarNumeroPuestoDisponible(reservas, cupoAsientos);
+	            // Obtener la lista de reservas asociadas a la lista de disponibilidad desde la base de datos
+	            List<Reserva> reservas = repositorioReserva.reservasPorListaDisponibilidad(idListaDisponibilidad);
 
-			// Verificar si se encontró un puesto disponible
-			if (nuevoNumeroPuesto != -1) {
-				// Modificar los datos de la reserva
-				boolean nuevoEstado = true; // Podrías definir aquí el nuevo estado
-				reserva.setNumeroPuesto(nuevoNumeroPuesto);
-				reserva.setEstado(nuevoEstado);
-				repositorioReserva.save(reserva);
+	            if (!reservas.isEmpty()) {
+	                // Buscar el cupo de asientos que tiene la buseta
+	                int cupoAsientos = repositorioBus.buscarPorCupoAsientos(idListaDisponibilidad);
 
-				return "Los datos de la reserva han sido modificados exitosamente.";
-			} else {
-				return "No hay asientos disponibles para modificar la reserva.";
-			}
-		} else {
-			return "La reserva no tiene una lista de disponibilidad asociada.";
-		}
+	                // Asignar el próximo número de puesto disponible
+	                int nuevoNumeroPuesto = repositorioReserva.asignarNumeroPuestoDisponible(reservas, cupoAsientos);
+
+	                // Verificar si se encontró un puesto disponible
+	                if (nuevoNumeroPuesto != -1) {
+	                    // Modificar los datos de la reserva
+	                    boolean nuevoEstado = reserva.getEstado(); // Podrías definir aquí el nuevo estado
+	                    reservaExistente.setNumeroPuesto(nuevoNumeroPuesto);
+	                    reservaExistente.setEstado(nuevoEstado);
+	                    repositorioReserva.save(reservaExistente);
+
+	                    // Retornar true para indicar que la actualización fue exitosa
+	                    return true;
+	                } else {
+	                    throw new IllegalArgumentException("No hay asientos disponibles para modificar la reserva.");
+	                }
+	            } else {
+	                throw new IllegalArgumentException("La reserva no tiene una lista de disponibilidad asociada.");
+	            }
+	        } else {
+	            throw new IllegalArgumentException("Reserva no encontrada.");
+	        }
+	    } else {
+	        throw new IllegalArgumentException("La reserva enviada es nula.");
+	    }
 	}
+
+
 
 }
