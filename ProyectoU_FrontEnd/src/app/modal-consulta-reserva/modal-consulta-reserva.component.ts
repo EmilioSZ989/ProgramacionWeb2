@@ -45,14 +45,14 @@ export class ModalConsultaReservaComponent implements OnInit {
           if (data && data.length > 0) {
             this.reservas = data;
             console.log(data);
-          } else {
+          } else { 
             alert("No se encontraron reservas para la cédula proporcionada.");
           }
         },
         error => {
           console.error("Error al consultar la reserva:", error);
         }
-      );
+      ); 
   }
   
   cancelarReservaUsuario(idReserva: number) {

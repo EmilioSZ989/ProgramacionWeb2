@@ -1,13 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { ListaDisponibilidaComponent } from '../lista-disponibilida/lista-disponibilida.component';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-modal-usuario-reserva',
   standalone: true,
-  imports: [],
+  imports: [ListaDisponibilidaComponent, CommonModule, FormsModule],
   templateUrl: './modal-usuario-reserva.component.html',
   styleUrl: './modal-usuario-reserva.component.css'
 })
 export class ModalUsuarioReservaComponent implements OnInit{
+  
+
   ngOnInit(): void {
   }
   abrirReservador(){
@@ -30,5 +35,5 @@ export class ModalUsuarioReservaComponent implements OnInit{
 
   realizarReservacion(){
 
-  }
+  } 
 }

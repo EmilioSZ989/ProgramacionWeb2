@@ -50,11 +50,7 @@ public class ControladorAdministrador {
 	}
 
 
-	@GetMapping("/listar_reservas")
-	public List<Reserva> listarReservaDia() {
-		LocalDate fechaActual = LocalDate.now();
-		return repositorioReserva.reservaPorDia(fechaActual);
-	}
+	
 
 	@GetMapping("/listar_usuarios/{id_bus}")
 	public List<Usuario> listarUsuariosPorAutomovil(@PathVariable Long id_bus) {

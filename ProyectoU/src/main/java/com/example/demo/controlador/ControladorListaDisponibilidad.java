@@ -18,6 +18,11 @@ public class ControladorListaDisponibilidad {
 	@Autowired
 	private repositorioListaDisponibilidad repositorioListaDisponibilidad; 
 	
+	@GetMapping("/viajes")
+	public List<ListaDisponibilidad> verTodosViajes(){
+		return repositorioListaDisponibilidad.findAll();
+	}
+	
 	@GetMapping("/ObtenerDestinoFecha")
 	public List<Object[]> obtenerDestinoFecha(){
 		return repositorioListaDisponibilidad.obtenerDestinoFecha();

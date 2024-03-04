@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.modelo.*;
@@ -28,6 +30,11 @@ public class ControladorUsuario {
 	@Autowired
 	private repositorioListaDisponibilidad repositorioListaDisponibilidad;
 
+	@PostMapping("/usuarios-por-bus")
+	public List<Usuario> listarUsuariosPorAutomovil(@RequestBody Long id_bus) {
+		return repositorioUsuario.usuariosPorAutomovil(id_bus);
+	}
+	
 	// CORREGIR ESTE CODE
 	@GetMapping("/realizar_reserva/{id_lista_disponibilidad}")
 	public String realizarReserva(@PathVariable Long id_lista_disponibilidad) {

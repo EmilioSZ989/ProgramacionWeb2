@@ -1,5 +1,6 @@
 package com.example.demo.controlador;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class ControladorReserva {
 	public List<Reserva> consultarReservaUsuario(@RequestBody Long cedula) {
 		return repositorioReserva.reservasPorCedula(cedula);
 	}
-
+	
 	@PostMapping("/cancelar_reserva")
 	public Optional<Reserva> cancelarReservaUsuario(@RequestBody Long id_reserva) {
 		Reserva reserva = repositorioReserva.findById(id_reserva).orElse(null);
@@ -51,5 +52,11 @@ public class ControladorReserva {
 		} else {
 			return Optional.empty();
 		}
+	}
+	
+	@GetMapping("/reservas-hoy")
+	public List<Reserva> listarReservaDia() {
+		LocalDate fechaActual = LocalDate.now();
+		return repositorioReserva.reservaPorDia(fechaActual);
 	}
 }

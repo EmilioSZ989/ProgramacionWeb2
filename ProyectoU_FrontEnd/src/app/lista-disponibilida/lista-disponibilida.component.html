@@ -1,29 +1,21 @@
 <h1>Lista de viajes disponibles!</h1>
 <div class="container">
   <div class="form-container" id="container_listas">
+    <!-- Input para seleccionar el destino -->
     <div class="form-group">
-      <label for="exampleFormControlSelect1">Selecciona destino:</label>
-      <select class="form-control" id="exampleFormControlSelect1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
+      <label for="destinoInput">Selecciona destino:</label>
+      <input type="text" class="form-control" id="destinoInput" name="destinoInput" placeholder="Ingrese destino" required [(ngModel)]="destinoSeleccionado">
     </div>
+    <!-- Input para seleccionar la fecha -->
     <div class="form-group">
-      <label for="exampleFormControlSelect2">Selecciona fecha:</label>
-      <select class="form-control" id="exampleFormControlSelect2">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
+      <label for="fechaInput">Selecciona fecha:</label>
+      <input type="text" class="form-control" id="fechaInput" name="fechaInput" placeholder="YYYY-MM-DD" required [(ngModel)]="fechaSeleccionada">
     </div>
-    <button type="submit" class="btn btn-primary">Filtrar Selección</button>
+    <!-- Botón para filtrar la selección -->
+    <button type="button" class="btn btn-primary" (click)="filtrarViajes()">Filtrar Selección</button>
   </div>
 </div>
+<!-- Tabla para mostrar los viajes de la lista de disponibilidad -->
 <table class="table">
   <thead>
     <tr>
@@ -37,16 +29,18 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>mdo</td>
-      <td>mdo</td>
-      <td>mdo</td>
-      <td><button class="btn btn-primary" (click)="abrirReservador()">Escoger</button></td>
+    <!-- Itera sobre los viajes filtrados y muestra los datos en la tabla -->
+    <tr *ngFor="let viaje of viajesFiltrados">
+      <th scope="row">{{viaje.idListaDisponibilidad}}</th>
+      <td>{{viaje.cupoDisponible}}</td>
+      <td>{{viaje.destino}}</td>
+      <td>{{viaje.fecha}}</td>
+      <td>{{viaje.horaSalida}}</td>
+      <td>{{viaje.totalPagar}}</td>
+      <!-- Botón para reservar el viaje -->
+      <td><button class="btn btn-primary" (click)="abrirReservador(viaje.idListaDisponibilidad)">Escoger</button></td>
     </tr>
   </tbody>
 </table>
+<!-- Aquí puedes incluir tu modal para realizar la reserva -->
 <app-modal-usuario-reserva></app-modal-usuario-reserva>
-

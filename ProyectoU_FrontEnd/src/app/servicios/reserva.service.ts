@@ -18,10 +18,19 @@ export class ReservaService {
   obtenerReservaCedula(cedula: number): Observable<Reserva[]> {
     return this.httpClient.post<Reserva[]>(`${this.CpCURL}`, cedula);
   }
+
+  
   
   private CRURL="http://localhost:8080/reserva/cancelar_reserva";
 
   cancelarReservaUsuario(idReserva: number): Observable<any>{
     return this.httpClient.post(`${this.CRURL}`,idReserva);
   }
+
+  private RpDURL = "http://localhost:8080/reserva/reservas-hoy";
+
+  obtenerReservaHoy(): Observable<Reserva[]> {
+    return this.httpClient.get<Reserva[]>(`${this.RpDURL}`);
+  }
+
 }
