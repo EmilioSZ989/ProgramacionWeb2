@@ -1,25 +1,89 @@
-/* Estilo para el fondo del modal */
+/* Estilos generales para el modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro */
+}
+
+/* Estilos para el contenido del modal */
 .modal-content {
-    background-image: url('https://img.freepik.com/foto-gratis/concepto-viaje-puntos-referencia_23-2149153261.jpg?t=st=1709331981~exp=1709335581~hmac=ccf39c78e2307476874b487dca671aca934a8f0a17a527c67d7d7ebfd9b26ee9&w=360'); /* Ruta de tu imagen de fondo */
-    background-size: cover; /* La imagen cubrirá todo el contenido */
-    background-position: center; /* La imagen estará centrada */
-  }
-  
-  /* Estilo para el título del modal */
+  background-color: #333; /* Color de fondo del modal */
+  color: #fff; /* Color del texto */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+/* Estilos para el encabezado del modal */
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  background-color: #212529; /* Gris oscuro */
+  color: #fff; /* Blanco */
+}
+
+/* Estilos para el título del modal */
 .modal-title {
-    font-weight: bold; /* Hacer que el título esté en negrita */
-    font-family: "Helvetica Now", sans-serif; /* Tipo de letra */
-    color: #004d99; /* Color del texto */
-    text-shadow: 2px 2px 4px #004d99; /* Sombra de texto */
-  }
-  
-  /* Estilo para todo el texto dentro del modal, excepto el texto dentro de las etiquetas <label> */
-  .modal-body, .modal-footer, .btn-primary {
-    font-weight: bold; /* Hacer que todo el texto esté en negrita */
-  }
-  
-  /* Estilo para el texto dentro de las etiquetas <label> */
-  .modal-body label {
-    font-weight: bold; /* Restaurar el peso de la fuente normal dentro de las etiquetas <label> */
-  }
-  
+  font-family: "Helvetica Now", sans-serif; /* Tipo de letra */
+  color: #004d99; /* Color del texto */
+  font-weight: bold; /* Hacer que el título esté en negrita */
+  text-shadow: 2px 2px 4px #004d99; /* Sombra de texto */
+}
+
+/* Estilos para el cuerpo del modal */
+.modal-body {
+  padding: 20px;
+}
+
+/* Estilos para el pie del modal */
+.modal-footer {
+  padding: 20px;
+  justify-content: center;
+}
+
+/* Estilos para los botones dentro del modal */
+.modal-body .btn-primary {
+  font-weight: bold; /* Hacer que el texto del botón esté en negrita */
+  background-color: #007bff; /* Color de fondo */
+  color: #fff; /* Color del texto */
+  border: none; /* Borde */
+  cursor: pointer; /* Cambiar el cursor */
+  transition: background-color 0.3s, color 0.3s; /* Transición suave */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px 20px; /* Ajustar el relleno */
+  margin-bottom: 10px; /* Separación entre botones */
+}
+
+/* Estilos al pasar el cursor sobre los botones */
+.modal-body .btn-primary:hover {
+  background-color: #0056b3; /* Cambio de color de fondo */
+}
+
+/* Estilos para los campos de entrada */
+.modal-body .form-control {
+  border-radius: 5px; /* Bordes redondeados */
+  background-color: #555; /* Gris oscuro */
+  color: #fff; /* Color del texto */
+  border: none; /* Borde */
+}
+
+/* Estilos para el texto dentro de las etiquetas <label> */
+.modal-body label {
+  font-weight: bold; /* Hacer que el texto del label esté en negrita */
+  color: #fff; /* Color del texto */
+}
+
+/* Estilos para los checkboxes */
+.modal-body .form-check-input {
+  margin-top: 5px; /* Margen superior */
+}
+
+/* Estilos para el botón de cerrar */
+.modal-body .btn-close {
+  color: #fff; /* Blanco */
+  font-weight: bold;
+}

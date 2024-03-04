@@ -1,72 +1,110 @@
-/* Estilos para la tabla responsive */
-.modal-title {
-  font-family: "Helvetica Now", sans-serif; /* Cambia el tipo de letra */
-  font-weight: bold; /* Hace que el texto esté en negrita */
-  color: #004d99; /* Azul oscuro */
-  text-shadow: 1px 1px 3px #004d99; /* Sombra de texto */
+/* Estilos generales para el modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Fondo oscuro */
 }
 
+/* Estilos para el contenido del modal */
+.modal-dialog {
+  margin: 50px auto;
+  width: 90%; /* Ajustar el ancho al 90% */
+  max-width: 800px; /* Ajustar el ancho máximo */
+  background-color: #333; /* Gris oscuro */
+  border-radius: 10px;
+}
+
+/* Estilos para el encabezado del modal */
+.modal-header {
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  background-color: #212529; /* Gris oscuro */
+  color: #fff; /* Blanco */
+}
+
+/* Estilos para el título del modal */
+.modal-title {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #fff; /* Blanco */
+}
+
+/* Estilos para el botón de cerrar */
+.btn-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-weight: bold;
+  color: #fff; /* Blanco */
+}
+
+/* Estilos para el cuerpo del modal */
+.modal-body {
+  padding: 20px;
+}
+
+/* Estilos para las etiquetas de los campos */
+.form-label {
+  font-weight: bold;
+  color: #fff; /* Blanco */
+}
+
+/* Estilos para los campos de entrada */
+.form-control {
+  margin-bottom: 15px;
+  background-color: #555; /* Gris oscuro */
+  color: #fff; /* Blanco */
+  border: none;
+}
+
+/* Estilos para el botón de "Consultar Reserva" */
+.modal-footer .btn-primary {
+  width: 100%;
+  font-weight: bold;
+}
+
+/* Estilos para el pie del modal */
+.modal-footer {
+  padding: 20px;
+  justify-content: center;
+}
+
+/* Estilos para la tabla dentro del modal */
+.table {
+  background-color: #212529; /* Gris oscuro */
+  color: #fff; /* Blanco */
+}
+
+/* Estilos para los encabezados de la tabla dentro del modal */
+.table thead th {
+  background-color: #343a40; /* Gris más oscuro */
+  color: #fff; /* Blanco */
+}
+
+/* Estilos para los botones dentro del modal */
+.modal-body button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #007bff; /* Azul */
+  color: #fff; /* Blanco */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.modal-body button:hover {
+  background-color: #0056b3; /* Azul más oscuro */
+}
+
+/* Estilos para hacer que la tabla sea responsive */
 .table-responsive {
   overflow-x: auto;
 }
-
-/* Estilo para ajustar el tamaño del modal al contenido de la tabla */
-.modal-dialog {
-  max-width: 90%; /* Modifica el ancho máximo según tus necesidades */
-}
-
-/* Estilo para mejorar la apariencia de los encabezados de la tabla */
-.table thead th {
-  white-space: nowrap; /* Evita el ajuste de texto en el encabezado */
-  overflow: hidden; /* Oculta el contenido que se desborda del encabezado */
-  text-overflow: ellipsis; /* Agrega puntos suspensivos (...) cuando el contenido se desborda */
-}
-
-/* Estilos personalizados para el formulario dentro del modal */
-.modal-body form {
-  display: flex; /* Usa flexbox para alinear los elementos */
-  align-items: center; /* Alinea verticalmente los elementos */
-}
-
-/* Estilos para el input de cédula */
-.modal-body form .form-label {
-  flex: 0 0 auto; /* Establece el tamaño del label de cédula */
-  margin-right: 10px; /* Agrega un margen derecho */
-  font-family: "Helvetica Now", sans-serif; /* Cambia el tipo de letra */
-    font-weight: bold; /* Hace que el texto esté en negrita */
-}
-
-.modal-body form .form-control {
-  flex: 1; /* El input ocupará todo el espacio restante */
-}
-
-/* Estilos para los botones dentro del formulario */
-.modal-body form .btn-group {
-  margin-left: auto; /* Los botones se colocarán al final del contenedor */
-}
-/* Estilo para el fondo del modal */
-.modal-content {
-  background-color: #C5E1A5; /* Color de fondo suave */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-/* Estilos para todos los botones */
-.btn {
-  padding: 10px 20px; /* Ajusta el relleno de los botones */
-  border-radius: 5px; /* Agrega bordes redondeados a los botones */
-  background-color: #007bff; /* Cambia el color de fondo de los botones */
-  color: #ffffff; /* Cambia el color del texto de los botones a blanco */
-  border: none; /* Elimina el borde de los botones */
-  cursor: pointer; /* Cambia el cursor al pasar sobre los botones */
-  transition: background-color 0.3s, color 0.3s; /* Agrega una transición suave al color de fondo y al color del texto */
-  font-weight: bold; /* Hacer que el texto del botón esté en negrita */
-}
-
-.btn:hover {
-  background-color: #0056b3; /* Cambia el color de fondo al pasar el cursor sobre los botones */
-}
-/* Estilos para los encabezados de la tabla dentro del modal */
-.modal-body table thead th {
-  background-color: #E0E0E0 ; /* Color de fondo para los encabezados de la tabla */
-}
-
