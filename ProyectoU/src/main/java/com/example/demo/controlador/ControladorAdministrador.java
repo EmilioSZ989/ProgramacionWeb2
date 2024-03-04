@@ -57,23 +57,21 @@ public class ControladorAdministrador {
 		return repositorioUsuario.usuariosPorAutomovil(id_bus);
 	}
 
-	@GetMapping("/registrar_pago/{idReserva}")
-	public String registrarPago(@PathVariable Long idReserva) {
-		Reserva reserva = repositorioReserva.findById(idReserva).orElse(null);
+	@PostMapping("/registrar_pago")
+	public boolean registrarPago(@RequestBody Long idReserva) {
+	    Reserva reserva = repositorioReserva.findById(idReserva).orElse(null);
 
-		if (reserva != null) {
-			if (reserva.getEstado().equals(false)) {
-				reserva.setEstado(true);
-				repositorioReserva.save(reserva);
-				return "Pago registrado exitosamente.";
-			} else if (reserva.getEstado().equals(true)) {
-				return "La reserva ya estaba pagada.";
-			} else {
-				return "Error en el estado de la reserva.";
-			}
-		} else {
-			return "Reserva no encontrada.";
-		}
+	    if (reserva != null) {
+	        if (!reserva.getEstado()) {
+	            reserva.setEstado(true);
+	            repositorioReserva.save(reserva);
+	            return true; // Pago registrado exitosamente
+	        } else {
+	            return false; // La reserva ya estaba pagada
+	        }
+	    } else {
+	        return false; // Reserva no encontrada
+	    }
 	}
 
 	@GetMapping("/modificar_datos/{idReserva}")

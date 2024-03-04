@@ -1,22 +1,22 @@
 <div class="modal" tabindex="-1" id="registro-pago">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Registrar pago de reserva</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarConsultor()" aria-label="Close"></button>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registro de Pago</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarConsultor()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label" for="idReserva">ID de Reserva:</label>
+          <input type="number" class="form-control" id="idReserva" [(ngModel)]="idReserva">
         </div>
-        <form>
-          <div class="modal-body">
-            <div class="mb-3">
-              <label class="form-label" for="num_reserva"> Numero de reserva:</label>
-              <input type="number" class="form-control" id="num_reserva" name="num_reserva" placeholder="Ingrese el número de reserva">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="registrarPago()">Actualizar estado</button>  
-          </div>
-        </form>
+        <p>¿Desea confirmar el pago de esta reserva?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="cerrarConsultor()">Cancelar</button>
+        <!-- Aquí se llama a la función registrarPago() con el ID de reserva ingresado -->
+        <button type="button" class="btn btn-primary" (click)="registrarPago(idReserva)">Confirmar Pago</button>
       </div>
     </div>
   </div>
-  
+</div>
