@@ -20,12 +20,19 @@ export class FuncionesAdministradorComponent implements OnInit{
   abrirConBoton(idElemento: string) {
     const elemento = document.getElementById(idElemento);
     if (elemento != null) {
-        elemento.style.display = "block";
+      // Mostrar el componente correspondiente al botón presionado
+      elemento.style.display = "block";
+      
+      // Si el botón presionado no es "Realizar Reserva", ocultar el componente de lista disponibilidad
+      if (idElemento !== 'container_listas') {
+        const listaDisponibilidad = document.getElementById('container_listas');
+        if (listaDisponibilidad != null) {
+          listaDisponibilidad.style.display = "none";
+        }
+      }
     } else {
-        alert("Error al abrir el elemento con el ID: " + idElemento);
+      alert("Error al abrir el elemento con el ID: " + idElemento);
     }
-}
-
-
+  }
   
 }
