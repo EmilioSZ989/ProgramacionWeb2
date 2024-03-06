@@ -6,29 +6,29 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarReservador()" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form (ngSubmit)="realizarReservacion()">
           <div class="mb-3">
             <label class="form-label" for="nombre">Nombre:</label>
-            <input placeholder="Ingrese su nombre" type="text" class="form-control" id="nombre" name="nombre">
+            <input placeholder="Ingrese su nombre" type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="nuevoUsuario.nombre" required>
           </div>
           <div class="mb-3">
             <label class="form-label" for="apellidos">Apellidos:</label>
-            <input placeholder="Ingrese sus apellidos" type="text" class="form-control" id="apellidos" name="apellidos">
+            <input placeholder="Ingrese sus apellidos" type="text" class="form-control" id="apellidos" name="apellidos" [(ngModel)]="nuevoUsuario.apellidos" required>
           </div>
           <div class="mb-3">
             <label class="form-label" for="cedula">Cédula:</label>
-            <input placeholder="Ingrese su cédula" type="number" class="form-control" id="cedula" name="id">
+            <input placeholder="Ingrese su cédula" type="number" class="form-control" id="cedula" name="id" [(ngModel)]="nuevoUsuario.cedula" required>
           </div>
           <div class="mb-3">
             <label class="form-label" for="fechaNacimiento">Fecha de Nacimiento:</label>
-            <input placeholder="Ingrese su fecha de nacimiento" type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento">
+            <input placeholder="Ingrese su fecha de nacimiento" type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" [(ngModel)]="nuevoUsuario.fechaNacimiento" required>
           </div>
           <div class="mb-3">
             <label class="form-label" for="telefono">Teléfono:</label>
-            <input placeholder="Ingrese su teléfono" type="tel" class="form-control" id="telefono" name="telefono">
+            <input placeholder="Ingrese su teléfono" type="tel" class="form-control" id="telefono" name="telefono" [(ngModel)]="nuevoUsuario.telefono" required>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" (click)="realizarReservacion()">Reservar</button>  
+            <button type="submit" class="btn btn-primary">Reservar</button>
           </div>
         </form>
       </div>

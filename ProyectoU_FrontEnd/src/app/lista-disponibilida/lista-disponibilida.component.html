@@ -38,9 +38,9 @@
       <td>{{viaje.horaSalida}}</td>
       <td>{{viaje.totalPagar}}</td>
       <!-- Botón para reservar el viaje -->
-      <td><button class="btn btn-primary" (click)="abrirReservador(viaje.idListaDisponibilidad)">Escoger</button></td>
-    </tr>
+      <td><button class="btn btn-primary" (click)="abrirReservador(viaje)">Escoger</button></td>
+</tr>
   </tbody>
 </table>
 <!-- Aquí puedes incluir tu modal para realizar la reserva -->
-<app-modal-usuario-reserva></app-modal-usuario-reserva>
+<app-modal-usuario-reserva [viajeSeleccionado]="viajeSeleccionado"></app-modal-usuario-reserva>

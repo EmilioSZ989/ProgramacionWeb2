@@ -12,14 +12,14 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './lista-disponibilida.component.html',
   styleUrl: './lista-disponibilida.component.css'
 })
-export class ListaDisponibilidaComponent implements OnInit{
-  viajes: ListaDisponibilidad[];
-  viajesFiltrados: ListaDisponibilidad[];
+export class ListaDisponibilidaComponent implements OnInit {
+  viajes: ListaDisponibilidad[] = [];
+  viajesFiltrados: ListaDisponibilidad[] = [];
   destinoSeleccionado: string;
   fechaSeleccionada: string;
+  viajeSeleccionado: number; // Cambiado a number
 
   constructor(private listaDisponibilidadServicio: ListaDisponibilidadService) { }
-  viajeSeleccionadoId: number;
   
   ngOnInit(): void {
     this.verViajes();
@@ -28,7 +28,7 @@ export class ListaDisponibilidaComponent implements OnInit{
   verViajes() {
     this.listaDisponibilidadServicio.obtenerListaViajes().subscribe(
       viajes => {
-        console.log(viajes)
+        console.log(viajes);
         this.viajes = viajes;
         // Al inicio, mostramos todos los viajes sin filtrar
         this.viajesFiltrados = viajes;
@@ -58,9 +58,11 @@ export class ListaDisponibilidaComponent implements OnInit{
     }
   }
   
+  abrirReservador(viaje: ListaDisponibilidad) {
+    // Guardar solo el ID del viaje seleccionado
+    this.viajeSeleccionado = viaje.idListaDisponibilidad;
 
-  abrirReservador(idViaje: number) {
-    this.viajeSeleccionadoId = idViaje;
+    // Abrir el modal
     const modal = document.getElementById("reservador");
     if (modal != null) {
       modal.style.display = "block";

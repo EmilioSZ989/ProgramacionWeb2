@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,57 +36,89 @@ public class ControladorUsuario {
 		return repositorioUsuario.usuariosPorAutomovil(id_bus);
 	}
 	
-	// CORREGIR ESTE CODE
-	@GetMapping("/realizar_reserva/{id_lista_disponibilidad}")
-	public String realizarReserva(@PathVariable Long id_lista_disponibilidad) {
-		String ms = "Error, reserva no encontrada";
-		String nombre = "emi";
-		String apellidos = "suaza";
-		Long cedula = 123456543L;
-		String telefono = "1234567890";
-		Date fechaNacimiento = Date.valueOf("2004-04-08");
+	@PostMapping("/guardarUsuarios")
+    public ResponseEntity<Usuario> guardarUsuarios(@RequestBody Usuario usuario) {
+        Usuario usuarioGuardado = repositorioUsuario.save(usuario);
+        return ResponseEntity.ok().body(usuarioGuardado);
+    }
+	
+	@PostMapping("/realizarReserva")
+    public ResponseEntity<Reserva> realizarReserva(@RequestBody List<Long> foranikey) {
+        // Verificamos si se proporcionaron los datos adecuados
+        if (foranikey == null || foranikey.size() != 2) {
+            return ResponseEntity.badRequest().build();
+        }
 
-		int cupoDisponible = repositorioListaDisponibilidad.buscarPorCupoDisponible(id_lista_disponibilidad);
+        // Extraemos los datos de la lista
+        Long cedula = foranikey.get(0);
+        Long idListaDisponibilidad = foranikey.get(1);
 
-		int cupoAsientos = repositorioBus.buscarPorCupoAsientos(id_lista_disponibilidad);
+        // Verificamos si el usuario y el viaje existen
+        Usuario usuario = repositorioUsuario.findById(cedula).orElse(null);
+        ListaDisponibilidad listaDisponibilidad = repositorioListaDisponibilidad.findById(idListaDisponibilidad).orElse(null);
+        if (usuario == null || listaDisponibilidad == null) {
+            return ResponseEntity.notFound().build();
+        }
 
-		if (cupoDisponible > 0) {
-			// Crear el usuario y guardarlo en la base de datos
-			Usuario usuario = new Usuario(cedula, nombre, apellidos, telefono, fechaNacimiento);
-			repositorioUsuario.save(usuario);
+        // Verificamos el cupo disponible en la lista de disponibilidad
+        int cupoDisponible = listaDisponibilidad.getCupoDisponible();
+        if (cupoDisponible <= 0) {
+            return ResponseEntity.badRequest().body(new Reserva());
+        }
 
-			// Obtener el usuario recién creado
-			usuario = repositorioUsuario.findById(cedula).orElse(null);
-			if (usuario == null) {
-				return "Error al crear el usuario";
-			}
+        // Verificamos el cupo de asientos disponibles en el bus
+        int cupoAsientos = repositorioBus.buscarPorCupoAsientos(idListaDisponibilidad);
+        if (cupoAsientos <= 0) {
+            return ResponseEntity.badRequest().body(new Reserva());
+        }
 
-			// Obtener la lista de reservas existentes para esta lista de disponibilidad
-			List<Reserva> reservas = repositorioReserva.reservasPorListaDisponibilidad(id_lista_disponibilidad);
+        // Asignamos el próximo número de puesto disponible
+        List<Reserva> reservas = repositorioReserva.reservasPorListaDisponibilidad(idListaDisponibilidad);
+        int numeroPuesto = asignarNumeroPuestoDisponible(reservas, cupoAsientos);
+        if (numeroPuesto == -1) {
+            return ResponseEntity.badRequest().body(new Reserva());
+        }
 
-			// Asignar el próximo número de puesto disponible
-			int numeroPuesto = repositorioReserva.asignarNumeroPuestoDisponible(reservas, cupoAsientos);
+        // Creamos la reserva
+        Reserva reserva = new Reserva(numeroPuesto, false, usuario, listaDisponibilidad);
 
-			if (numeroPuesto != -1) {
-				// Crear la reserva y asignar el número de puesto
-				Reserva reserva = new Reserva(numeroPuesto, false, usuario,
-						repositorioListaDisponibilidad.findById(id_lista_disponibilidad).orElse(null));
-				if (reserva.getId_lista_disponibilidad() == null) {
-					return "Error al obtener la opción que seleccionaste en la lista de disponibilidad";
-				}
-				repositorioReserva.save(reserva);
+        // Guardamos la reserva en la base de datos
+        Reserva reservaGuardada = repositorioReserva.save(reserva);
 
-				ms = "Su número de puesto es: " + numeroPuesto + " y tiene que pagar: "
-						+ reserva.getId_lista_disponibilidad().getTotalPagar();
-				cupoDisponible--;
-				repositorioListaDisponibilidad.actualizarCupoDisponible(id_lista_disponibilidad, cupoDisponible);
-				return ms;
-			} else {
-				return "No hay asientos disponibles";
-			}
-		} else {
-			return "Ya no es posible reservar en esta lista de disponibilidad";
-		}
-	}
+        // Actualizamos el cupo disponible en la lista de disponibilidad
+        listaDisponibilidad.setCupoDisponible(cupoDisponible - 1);
+        repositorioListaDisponibilidad.save(listaDisponibilidad);
 
+        // Retornamos la reserva guardada
+        return ResponseEntity.ok().body(reservaGuardada);
+    }
+
+    public int asignarNumeroPuestoDisponible(List<Reserva> reservas, int cupoAsientos) {
+        boolean[] asientosDisponibles = new boolean[cupoAsientos + 1];
+
+        // Inicializar el array de asientos disponibles
+        for (int i = 1; i <= cupoAsientos; i++) {
+            asientosDisponibles[i] = true;
+        }
+
+        // Marcar los asientos ocupados por reservas existentes
+        for (Reserva reserva : reservas) {
+            if (reserva.getNumeroPuesto() > 0 && reserva.getNumeroPuesto() <= cupoAsientos) {
+                asientosDisponibles[reserva.getNumeroPuesto()] = false;
+            }
+        }
+
+        // Encontrar el próximo asiento disponible
+        for (int i = 1; i <= cupoAsientos; i++) {
+            if (asientosDisponibles[i]) {
+                return i;
+            }
+        }
+
+        // Si no hay asientos disponibles
+        return -1;
+    }
 }
+
+
+
