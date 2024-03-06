@@ -74,7 +74,7 @@ public class ControladorUsuario {
 
         // Asignamos el próximo número de puesto disponible
         List<Reserva> reservas = repositorioReserva.reservasPorListaDisponibilidad(idListaDisponibilidad);
-        int numeroPuesto = asignarNumeroPuestoDisponible(reservas, cupoAsientos);
+        int numeroPuesto = repositorioReserva.asignarNumeroPuestoDisponible(reservas, cupoAsientos);
         if (numeroPuesto == -1) {
             return ResponseEntity.badRequest().body(new Reserva());
         }
@@ -93,31 +93,7 @@ public class ControladorUsuario {
         return ResponseEntity.ok().body(reservaGuardada);
     }
 
-    public int asignarNumeroPuestoDisponible(List<Reserva> reservas, int cupoAsientos) {
-        boolean[] asientosDisponibles = new boolean[cupoAsientos + 1];
-
-        // Inicializar el array de asientos disponibles
-        for (int i = 1; i <= cupoAsientos; i++) {
-            asientosDisponibles[i] = true;
-        }
-
-        // Marcar los asientos ocupados por reservas existentes
-        for (Reserva reserva : reservas) {
-            if (reserva.getNumeroPuesto() > 0 && reserva.getNumeroPuesto() <= cupoAsientos) {
-                asientosDisponibles[reserva.getNumeroPuesto()] = false;
-            }
-        }
-
-        // Encontrar el próximo asiento disponible
-        for (int i = 1; i <= cupoAsientos; i++) {
-            if (asientosDisponibles[i]) {
-                return i;
-            }
-        }
-
-        // Si no hay asientos disponibles
-        return -1;
-    }
+    
 }
 
 
