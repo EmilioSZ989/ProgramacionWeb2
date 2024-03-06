@@ -13,8 +13,7 @@ import { ListaDisponibilidad } from '../entities/lista-disponibilidad';
   imports: [ListaDisponibilidaComponent, CommonModule, FormsModule],
   templateUrl: './modal-usuario-reserva.component.html',
   styleUrl: './modal-usuario-reserva.component.css'
-})
-export class ModalUsuarioReservaComponent {
+})export class ModalUsuarioReservaComponent {
   nuevoUsuario: Usuario = new Usuario();
   @Input() viajeSeleccionado: number;
 
@@ -49,7 +48,8 @@ export class ModalUsuarioReservaComponent {
           this.usuarioService.realizarReserva(foranikey).subscribe(
             (reserva: Reserva) => {
               console.log('Reserva realizada:', reserva);
-              // Aquí puedes agregar la lógica que necesites después de realizar la reserva
+              alert('¡Reserva realizada correctamente!');
+              this.cerrarReservador(); // Cerrar el modal automáticamente
             },
             (error: any) => {
               console.error('Error al realizar la reserva:', error);
